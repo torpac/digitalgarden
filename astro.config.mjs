@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
 import remarkBasePaths from './src/lib/remarkBasePaths.mjs';
 
-// These settings also handle project repositories hosted under /repository-name/.
+// GitHub Actions uses the current repository name to generate correct CSS, image and link paths.
+// Rebuild after a repository rename so the published assets point to the new location.
 const [owner, repo] = (process.env.GITHUB_REPOSITORY || '/').split('/');
 const isUserSite = repo?.toLowerCase() === `${owner?.toLowerCase()}.github.io`;
 
