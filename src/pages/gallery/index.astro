@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionIntro from '../../components/SectionIntro.astro';
+import { getCollection } from 'astro:content';
+import { copy } from '../../lib/settings';
+import { mediaUrl, safeExternalUrl } from '../../lib/paths';
+const pictures = (await getCollection('gallery', ({data}) => !data.draft && !!data.image))
+  .sort((a,b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title));
+---
+<BaseLayout title={copy.pages.gallery.title}>
+  <div class="shell content-page">
+    <SectionIntro {...copy.pages.gallery} />
+    <div class="gallery-toolbar"><span>▧ gallery / {pictures.length} saved pictures</span><span>little things worth keeping ✧</span></div>
+    {pictures.length > 0 ? <div class="gallery-columns">
+      {pictures.map((picture, index) => {
+        const image = mediaUrl(picture.data.image);
+        const source = safeExternalUrl(picture.data.sourceUrl);
+        return <article class="gallery-tile rise-on-scroll">
+          <button class="gallery-photo" type="button" data-gallery-open data-full={image} data-title={picture.data.title} data-caption={picture.data.description || ''} aria-label={'View '+picture.data.title+' larger'}>
+            <img src={image} alt={picture.data.title} loading="lazy" decoding="async" />
+          </button>
+          <div class="gallery-tile-copy">
+            <h2>{picture.data.title}</h2>
+            {picture.data.description && <p>{picture.data.description}</p>}
+            <div class="gallery-meta">
+              <span>#{String(index + 1).padStart(2,'0')}{picture.data.date ? ' · '+picture.data.date.toLocaleDateString('en-GB') : ''}</span>
+              {source && <a href={source} rel="noopener noreferrer" target="_blank">original ↗</a>}
+            </div>
+          </div>
+        </article>;
+      })}
+    </div> : <div class="gallery-empty"><span class="pixel">✧</span>nothing in the gallery yet.<p>upload your first image in Pages CMS → Gallery.</p></div>}
+    <dialog id="gallery-lightbox" class="gallery-lightbox" aria-label="Picture viewer">
+      <div class="gallery-lightbox-head"><strong id="gallery-lightbox-title"></strong><button class="gallery-lightbox-close" type="button" id="gallery-lightbox-close">× close</button></div>
+      <img id="gallery-lightbox-image" alt="" />
+      <p id="gallery-lightbox-caption"></p>
+    </dialog>
+  </div>
+  <script>
+    const modal = document.querySelector<HTMLDialogElement>('#gallery-lightbox');
+    const large = document.querySelector<HTMLImageElement>('#gallery-lightbox-image');
+    const caption = document.querySelector<HTMLElement>('#gallery-lightbox-caption');
+    const title = document.querySelector<HTMLElement>('#gallery-lightbox-title');
+    document.querySelectorAll<HTMLButtonElement>('[data-gallery-open]').forEach(button=>{
+      button.addEventListener('click',()=>{
+        if(!modal || !large || !caption || !title) return;
+        large.src = button.dataset.full || '';
+        large.alt = button.dataset.title || '';
+        caption.textContent = button.dataset.caption || '';
+        title.textContent = button.dataset.title || '';
+        modal.showModal();
+      });
+    });
+    document.querySelector('#gallery-lightbox-close')?.addEventListener('click',()=>modal?.close());
+    modal?.addEventListener('click',event=>{if(event.target===modal)modal.close();});
+  </script>
+</BaseLayout>

@@ -1,0 +1,12 @@
+{
+  "visitedCountries": "",
+  "visitedColor": "#cdc4ed",
+  "landColor": "#384762",
+  "seaColor": "#162238",
+  "outlineColor": "#62738f",
+  "mapHeading": "world_map.svg",
+  "mapDescription": "click a country to see its name. use edit mode to select places and copy the list into Pages CMS.",
+  "selectedHeading": "visited countries",
+  "emptyText": "nothing marked yet. the world is waiting.",
+  "note": "my map, my memories. somewhere on this planet."
+}

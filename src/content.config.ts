@@ -52,4 +52,17 @@ const pins = defineCollection({
     example: z.boolean().default(false), draft: z.boolean().default(false),
   }),
 });
-export const collections = { posts, films, games, series, books, playlists, pins };
+const gallery = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/gallery' }),
+  schema: z.object({
+    title: z.string(),
+    image: z.string().optional(),
+    description: z.string().optional(),
+    sourceUrl: z.string().optional(),
+    date: z.coerce.date().optional(),
+    order: z.number().int().nonnegative().default(99),
+    tags: z.array(z.string()).optional().default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+export const collections = { posts, films, games, series, books, playlists, pins, gallery };

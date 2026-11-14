@@ -261,6 +261,12 @@ content:
   - name: about
     label: About — corner photo
     type: image
+  - name: gallery
+    label: Gallery — corner photo
+    type: image
+  - name: travel
+    label: Travel — corner photo
+    type: image
 - name: copy
   label: 02 — Every page heading and interface label
   type: file
@@ -429,6 +435,38 @@ content:
         type: string
       - name: glyph
         label: Glyph
+        type: string
+    - name: gallery
+      label: Gallery
+      type: object
+      fields:
+      - name: label
+        label: Tiny heading
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: glyph
+        label: Symbol
+        type: string
+    - name: travel
+      label: Travel
+      type: object
+      fields:
+      - name: label
+        label: Tiny heading
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: glyph
+        label: Symbol
         type: string
     - name: about
       label: About
@@ -1070,6 +1108,88 @@ content:
   - name: body
     label: Optional notes
     type: rich-text
+- name: travel_settings
+  label: ✈ Travel — visited countries and map colors
+  type: file
+  path: src/data/travel.json
+  format: json
+  operations:
+    delete: false
+  fields:
+  - name: visitedCountries
+    label: Visited countries — comma-separated names
+    type: text
+    description: 'Example: Finland, Turkey, Germany. Or click countries on the Travel page and copy a list to paste here.'
+  - name: visitedColor
+    label: Visited color (hex)
+    type: string
+  - name: landColor
+    label: Unvisited land color (hex)
+    type: string
+  - name: seaColor
+    label: Ocean color (hex)
+    type: string
+  - name: outlineColor
+    label: Country border color (hex)
+    type: string
+  - name: mapHeading
+    label: Map window title
+    type: string
+  - name: mapDescription
+    label: Instructions
+    type: text
+  - name: selectedHeading
+    label: Visited list title
+    type: string
+  - name: emptyText
+    label: Empty message
+    type: text
+  - name: note
+    label: Closing line
+    type: string
+- name: gallery
+  label: ▧ Gallery — picture wall
+  type: collection
+  path: src/content/gallery
+  format: yaml-frontmatter
+  filename: '{title}.md'
+  view:
+    primary: title
+    fields:
+    - title
+    - order
+    - date
+    - draft
+    default:
+      sort: order
+      order: asc
+  fields:
+  - name: title
+    label: Image title
+    type: string
+    required: true
+  - name: image
+    label: Upload picture
+    type: image
+  - name: description
+    label: Caption (optional)
+    type: text
+  - name: sourceUrl
+    label: Original Pinterest pin or source URL
+    type: string
+  - name: date
+    label: Date added
+    type: date
+  - name: order
+    label: Position (0 is first)
+    type: number
+  - name: tags
+    label: Tags
+    type: string
+    list: true
+  - name: draft
+    label: Hide from website
+    type: boolean
 - name: pins
   label: ✳ Homepage pinboard
   type: collection

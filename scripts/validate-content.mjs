@@ -5,8 +5,9 @@ function read(name) {return JSON.parse(fs.readFileSync(path.join(root,'src','dat
 let failures = 0;
 function check(value,message) { if(!value){failures++;console.error('✗',message);} }
 const site=read('site'); const copy=read('copy'); const appearance=read('appearance');
+const travel=read('travel');
 const pageImages=read('pageImages');
-for(const section of ['home','posts','films','games','series','books','music','about']) check(typeof pageImages[section]==='string',`Page corner photo for ${section} must be a text image path`);
+for(const section of ['home','posts','films','games','series','books','music','about','gallery','travel']) check(typeof pageImages[section]==='string',`Page corner photo for ${section} must be a text image path`);
 const route = (url) => typeof url==='string' && url.startsWith('/') && !url.startsWith('//') && /^\/[\w\-/]*$/.test(url);
 for (const f of ['name','headline','intro','about','siteTagline','footerLine']) check(typeof site[f]==='string', `Identity.${f} must be text`);
 for (const [field, arr, href] of [['navigation',site.navigation,'href'],['folders',site.folders,'href'],['favoritesShelves',site.favoritesShelves,'href']]) {
@@ -33,5 +34,7 @@ for(const item of ['posts','films','games','series','books','music','about']) {
 }
 for(const [key,val] of Object.entries(appearance.visibility))check(typeof val==='boolean',`Appearance.visibility.${key} must be true or false`);
 for(const [key,val] of Object.entries(appearance.effects))check(typeof val==='boolean',`Appearance.effects.${key} must be true or false`);
+for(const key of ['visitedColor','landColor','seaColor','outlineColor']) check(/^#[a-fA-F0-9]{3}([a-fA-F0-9]{3})?$/.test(travel[key]),'Invalid travel map color: '+key);
+check(typeof travel.visitedCountries === 'string','Travel country list must be text');
 if(failures){console.error(`\n${failures} problem(s) with CMS data. Fix before publishing.`);process.exitCode=1;}
 else console.log('✓ All editable settings passed validation.');

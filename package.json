@@ -11,7 +11,10 @@
     "validate": "node scripts/validate-content.mjs"
   },
   "dependencies": {
-    "astro": "^5.16.0"
+    "astro": "^5.16.0",
+    "d3-geo": "^3.1.1",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
   },
   "engines": {
     "node": ">=20.19.0"

@@ -5,7 +5,7 @@
     "heroSecondaryLabel": "who am i?",
     "heroSkyCaption": "somewhere beneath the stars · ✳ since 2026 ✳",
     "foldersTitle": "📁 file explorer",
-    "foldersMeta": "index / 6 folders",
+    "foldersMeta": "index / 8 folders",
     "foldersHeading": "where would you like to go?",
     "recentTitle": "✳ recently planted",
     "recentMeta": "garden.log",
@@ -62,6 +62,18 @@
       "title": "hello again.",
       "description": "a little note from the person running this place.",
       "glyph": "✷"
+    },
+    "gallery": {
+      "label": "06 / gallery.htm",
+      "title": "the gallery.",
+      "description": "little pictures, found textures, things i want to remember.",
+      "glyph": "✧"
+    },
+    "travel": {
+      "label": "07 / atlas.exe",
+      "title": "places i've been.",
+      "description": "a tiny map of the world and the places i've wandered.",
+      "glyph": "✈"
     }
   },
   "posts": {

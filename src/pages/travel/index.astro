@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionIntro from '../../components/SectionIntro.astro';
+import { copy, editorColor } from '../../lib/settings';
+import travel from '../../data/travel.json';
+import { feature } from 'topojson-client';
+import { geoNaturalEarth1, geoPath } from 'd3-geo';
+import world from 'world-atlas/countries-110m.json';
+const countries = (feature(world as any, (world as any).objects.countries) as any).features;
+const projection = geoNaturalEarth1().fitExtent([[14,14],[986,522]],{type:'Sphere'} as any);
+const draw = geoPath(projection);
+const countryPaths = countries.map((country:any)=>({
+  name: String(country.properties?.name || country.id),
+  geometry: draw(country) || ''
+})).filter((country:any)=>country.geometry);
+const norm = (s:string)=>s.trim().toLocaleLowerCase('en').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const aliases:Record<string,string> = {turkiye:'turkey',türkiye:'turkey',usa:'united states of america',us:'united states of america','united states':'united states of america',uk:'united kingdom'};
+const publishedList = travel.visitedCountries.split(/[,;\n]+/).map(norm).filter(Boolean).map(x=>aliases[x] || x);
+const visited = new Set(publishedList);
+const selected = countryPaths.filter((country:any)=>visited.has(norm(country.name))).map((country:any)=>country.name).sort();
+const travelStyle = [
+  '--travel-visited:'+editorColor(travel.visitedColor),
+  '--travel-land:'+editorColor(travel.landColor),
+  '--travel-sea:'+editorColor(travel.seaColor),
+  '--travel-border:'+editorColor(travel.outlineColor)
+].join(';');
+---
+<BaseLayout title={copy.pages.travel.title}>
+  <div class="shell content-page">
+    <SectionIntro {...copy.pages.travel}/>
+    <div class="travel-panel rise-on-scroll" style={travelStyle}>
+      <div class="travel-panel-head"><span>✈ {travel.mapHeading}</span><span>EARTH / 001</span></div>
+      <div class="travel-panel-body">
+        <p>{travel.mapDescription}</p>
+        <div class="travel-toolbar">
+          <span>✳ marked countries: <strong id="travel-count">{selected.length}</strong></span>
+          <button id="travel-edit-toggle" type="button" aria-pressed="false">✎ edit map</button>
+        </div>
+        <div class="travel-map-window">
+          <svg id="travel-map" class="travel-map" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Interactive world country map">
+            {countryPaths.map((country:any)=><path class="travel-country" d={country.geometry} data-country={country.name} data-visited={visited.has(norm(country.name)) ? 'true' : 'false'} tabindex="0" role="button" aria-label={country.name} aria-pressed={visited.has(norm(country.name)) ? 'true':'false'}><title>{country.name}</title></path>)}
+          </svg>
+        </div>
+        <div class="travel-status" id="travel-status" aria-live="polite">hover or click a country to see its name.</div>
+        <div id="travel-editor" hidden>
+          <div class="travel-edit-note">✎ <strong>Preview mode.</strong> Click the map to mark places, then copy the list into <strong>Pages CMS → Travel → Visited countries</strong> and save. Clicking here alone does not publish the change.</div>
+          <div class="travel-controls">
+            <input id="travel-country-search" list="travel-country-options" placeholder="Search a country…" aria-label="Country name"/>
+            <datalist id="travel-country-options">{countryPaths.map((c:any)=><option value={c.name}/>)}</datalist>
+            <button type="button" id="travel-add-country">+ add / remove</button>
+            <button type="button" id="travel-reset">↶ revert</button>
+            <button type="button" id="travel-copy">⧉ copy list</button>
+          </div>
+          <textarea id="travel-export" class="travel-export" readonly aria-label="Copyable selected country names"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="travel-visited-box rise-on-scroll">
+      <h2>✳ {travel.selectedHeading}</h2>
+      <div id="travel-empty" hidden={selected.length>0}>{travel.emptyText}</div>
+      <ul id="travel-list">{selected.map(country=><li>{country}</li>)}</ul>
+    </div>
+    <div class="travel-note">{travel.note}</div>
+  </div>
+  <script>
+    const map = document.querySelector<SVGSVGElement>('#travel-map');
+    const toggle = document.querySelector<HTMLButtonElement>('#travel-edit-toggle');
+    const editor = document.querySelector<HTMLElement>('#travel-editor');
+    const counter = document.querySelector<HTMLElement>('#travel-count');
+    const status = document.querySelector<HTMLElement>('#travel-status');
+    const list = document.querySelector<HTMLUListElement>('#travel-list');
+    const empty = document.querySelector<HTMLElement>('#travel-empty');
+    const exportArea = document.querySelector<HTMLTextAreaElement>('#travel-export');
+    const search = document.querySelector<HTMLInputElement>('#travel-country-search');
+    if (map && toggle && editor && counter && status && list && empty && exportArea && search) {
+      const paths = Array.from(map.querySelectorAll<SVGPathElement>('.travel-country'));
+      const published = new Set(paths.filter(p=>p.dataset.visited === 'true').map(p=>p.dataset.country || ''));
+      let selection = new Set(published);
+      let editing = false;
+      const names = paths.map(p=>p.dataset.country || '').filter(Boolean);
+      function redraw(){
+        const sorted=Array.from(editing ? selection : published).sort((a,b)=>a.localeCompare(b));
+        map!.dataset.editing=String(editing);
+        paths.forEach(p=>{
+          const selected=selection.has(p.dataset.country || '');
+          p.dataset.preview=String(selected);
+          p.setAttribute('aria-pressed',String(editing ? selected : published.has(p.dataset.country || '')));
+        });
+        counter!.textContent=String(sorted.length);
+        list!.replaceChildren();
+        sorted.forEach(name=>{const li=document.createElement('li');li.textContent=name;list!.appendChild(li);});
+        empty!.hidden=sorted.length>0;
+        exportArea!.value=sorted.join(', ');
+      }
+      function activate(name:string){
+        if(!editing){status!.textContent = name + (published.has(name) ? ' ✳ visited' : ' · not marked');return;}
+        if(selection.has(name))selection.delete(name);else selection.add(name);
+        status!.textContent = name + (selection.has(name) ? ' ✓ selected' : ' × unmarked') + ' (preview only)';
+        redraw();
+      }
+      paths.forEach(path=>{
+        path.addEventListener('click',()=>activate(path.dataset.country || ''));
+        path.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate(path.dataset.country || '');}});
+        path.addEventListener('mouseenter',()=>{status!.textContent=path.dataset.country || '';});
+      });
+      toggle.addEventListener('click',()=>{
+        editing=!editing;
+        selection=new Set(published);
+        editor!.hidden=!editing;
+        toggle!.setAttribute('aria-pressed',String(editing));
+        toggle!.textContent=editing?'✓ close edit mode':'✎ edit map';
+        status!.textContent=editing?'edit mode is only a preview until you save the copied list in Pages CMS':'click a country to view its name';
+        redraw();
+      });
+      document.querySelector('#travel-add-country')?.addEventListener('click',()=>{
+        const name=names.find(n=>n.toLocaleLowerCase()===search!.value.trim().toLocaleLowerCase());
+        if(name)activate(name);
+        else status!.textContent='No matching country; select a suggestion from the list.';
+      });
+      document.querySelector('#travel-reset')?.addEventListener('click',()=>{selection=new Set(published);status!.textContent='Reset to the published list.';redraw();});
+      document.querySelector('#travel-copy')?.addEventListener('click',async()=>{
+        const text=exportArea!.value;
+        try{await navigator.clipboard.writeText(text);status!.textContent='Copied! Paste into Pages CMS → Travel settings → Visited countries.';}
+        catch{exportArea!.focus();exportArea!.select();status!.textContent='Select and copy the text below, then paste into Pages CMS.';}
+      });
+      search.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();document.querySelector<HTMLButtonElement>('#travel-add-country')?.click();}});
+      redraw();
+    }
+  </script>
+</BaseLayout>

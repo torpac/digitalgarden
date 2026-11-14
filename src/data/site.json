@@ -83,6 +83,18 @@
       "enabled": true
     },
     {
+      "label": "gallery",
+      "href": "/gallery/",
+      "icon": "",
+      "enabled": true
+    },
+    {
+      "label": "travel",
+      "href": "/travel/",
+      "icon": "",
+      "enabled": true
+    },
+    {
       "label": "about",
       "href": "/about/",
       "enabled": true
@@ -129,6 +141,20 @@
       "href": "/music/",
       "symbol": "♫",
       "description": "playlists",
+      "enabled": true
+    },
+    {
+      "name": "gallery",
+      "href": "/gallery/",
+      "symbol": "▧",
+      "description": "things worth keeping",
+      "enabled": true
+    },
+    {
+      "name": "travel",
+      "href": "/travel/",
+      "symbol": "✈",
+      "description": "places i've wandered",
       "enabled": true
     }
   ],
