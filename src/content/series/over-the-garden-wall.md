@@ -5,7 +5,7 @@ year: 2014
 rank: 2
 rating: 8
 example: true
-draft: false
+draft: true
 ---
 
 Your opinions, your words, your favorite scenes. Replace this placeholder when you're ready.

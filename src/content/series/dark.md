@@ -5,7 +5,7 @@ year: 2017
 rank: 1
 rating: 9
 example: true
-draft: false
+draft: true
 ---
 
 Write your personal review or a few thoughts about this series. This entry is sample content only.

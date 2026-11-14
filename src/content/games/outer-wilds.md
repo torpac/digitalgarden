@@ -6,7 +6,7 @@ platform: PC
 rank: 1
 rating: 9
 example: true
-draft: false
+draft: true
 ---
 
 This is an **example**, not a claim about your favorite games. Write about why a particular game mattered to you, moments you remember, or what makes its world special.

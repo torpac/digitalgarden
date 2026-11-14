@@ -5,7 +5,7 @@ year: 2014
 rank: 2
 rating: 8
 example: true
-draft: false
+draft: true
 ---
 
 Add a review here through Pages CMS. The rating is optional — you can write something without scoring it.

@@ -6,7 +6,7 @@ rank: 2
 rating: 8
 cover: ''
 example: true
-draft: false
+draft: true
 ---
 
 Add your own thoughts here.

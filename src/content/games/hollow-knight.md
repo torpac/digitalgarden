@@ -5,7 +5,7 @@ year: 2017
 rank: 2
 rating: 9
 example: true
-draft: false
+draft: true
 ---
 
 Swap this with a game of your choice in the dashboard.

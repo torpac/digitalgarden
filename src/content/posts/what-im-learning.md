@@ -8,7 +8,7 @@ tags:
   - ideas
 featured: false
 example: true
-draft: false
+draft: true
 ---
 
 This is a **placeholder post** for a concept, observation, or question you're exploring.
