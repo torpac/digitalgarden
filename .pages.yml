@@ -107,9 +107,6 @@ content:
   - name: heroImage
     label: Homepage sky panel image (optional)
     type: image
-  - name: sidebarSkyImage
-    label: Sidebar night-sky image (optional)
-    type: image
   - name: currentlyLabels
     label: Currently field captions
     type: object
@@ -232,6 +229,38 @@ content:
     - name: enabled
       label: Show section
       type: boolean
+- name: pageImages
+  label: 04 — Page corner photos (separate images)
+  type: file
+  path: src/data/pageImages.json
+  format: json
+  operations:
+    delete: false
+  fields:
+  - name: home
+    label: Home — corner photo
+    type: image
+  - name: posts
+    label: Garden / Posts — corner photo
+    type: image
+  - name: films
+    label: Films — corner photo
+    type: image
+  - name: games
+    label: Games — corner photo
+    type: image
+  - name: series
+    label: Series — corner photo
+    type: image
+  - name: books
+    label: Books — corner photo
+    type: image
+  - name: music
+    label: Music — corner photo
+    type: image
+  - name: about
+    label: About — corner photo
+    type: image
 - name: copy
   label: 02 — Every page heading and interface label
   type: file

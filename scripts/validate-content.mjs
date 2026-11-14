@@ -5,6 +5,8 @@ function read(name) {return JSON.parse(fs.readFileSync(path.join(root,'src','dat
 let failures = 0;
 function check(value,message) { if(!value){failures++;console.error('✗',message);} }
 const site=read('site'); const copy=read('copy'); const appearance=read('appearance');
+const pageImages=read('pageImages');
+for(const section of ['home','posts','films','games','series','books','music','about']) check(typeof pageImages[section]==='string',`Page corner photo for ${section} must be a text image path`);
 const route = (url) => typeof url==='string' && url.startsWith('/') && !url.startsWith('//') && /^\/[\w\-/]*$/.test(url);
 for (const f of ['name','headline','intro','about','siteTagline','footerLine']) check(typeof site[f]==='string', `Identity.${f} must be text`);
 for (const [field, arr, href] of [['navigation',site.navigation,'href'],['folders',site.folders,'href'],['favoritesShelves',site.favoritesShelves,'href']]) {

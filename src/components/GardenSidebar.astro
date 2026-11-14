@@ -1,7 +1,14 @@
 ---
 import { site, appearance, publicNavigation, publicSocials } from '../lib/settings';
 import { path, safeExternalUrl, mediaUrl } from '../lib/paths';
-const sky = mediaUrl(site.sidebarSkyImage);
+import pageImages from '../data/pageImages.json';
+const siteBase = import.meta.env.BASE_URL.replace(/\/$/, '');
+const currentPath = Astro.url.pathname;
+const pagePath = siteBase && (currentPath === siteBase || currentPath.startsWith(`${siteBase}/`))
+  ? currentPath.slice(siteBase.length)
+  : currentPath;
+const section = pagePath.split('/').filter(Boolean)[0] || 'home';
+const sky = mediaUrl(pageImages[section as keyof typeof pageImages]);
 const now = [
   [site.currentlyLabels.watching,site.nowWatching],
   [site.currentlyLabels.playing,site.nowPlaying],
