@@ -9,7 +9,7 @@ import { site, appearance, themeStyle } from '../lib/settings';
 import { mediaUrl } from '../lib/paths';
 interface Props { title?: string; description?: string }
 const { title, description = site.intro } = Astro.props;
-const pageTitle = title ? `${title} | ${site.name.toLowerCase()}` : `${site.name.toLowerCase()} | ${site.browserTitleSuffix}`;
+const pageTitle = title ? `${title} | ${site.name.toLowerCase()}` : site.name.toLowerCase();
 const favicon = mediaUrl(site.faviconImage) || `${import.meta.env.BASE_URL}favicon.svg`;
 ---
 <!doctype html>
