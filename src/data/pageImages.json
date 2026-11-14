@@ -2,5 +2,11 @@
   "films": "/uploads/teyze.jpg",
   "books": "/uploads/kitap.jpg",
   "about": "/uploads/maraton.jpg",
-  "travel": "/uploads/travel.jpg"
+  "travel": "/uploads/travel.jpg",
+  "home": "",
+  "posts": "",
+  "games": "",
+  "series": "",
+  "music": "",
+  "gallery": ""
 }

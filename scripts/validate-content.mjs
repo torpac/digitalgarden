@@ -7,7 +7,17 @@ function check(value,message) { if(!value){failures++;console.error('✗',messag
 const site=read('site'); const copy=read('copy'); const appearance=read('appearance');
 const travel=read('travel');
 const pageImages=read('pageImages');
-for(const section of ['home','posts','films','games','series','books','music','about','gallery','travel']) check(typeof pageImages[section]==='string',`Page corner photo for ${section} must be a text image path`);
+// Pages CMS omits empty optional image fields when saving, so missing keys mean no image.
+for (const section of ['home','posts','films','games','series','books','music','about','gallery','travel']) {
+  const image = pageImages[section];
+  check(image == null || typeof image === 'string', `Page corner photo for ${section} must be a text image path`);
+  if (typeof image === 'string' && image.trim()) {
+    const local = image.startsWith('/uploads/');
+    const external = /^https?:\/\//.test(image);
+    check(local || external, `Page corner photo for ${section} must be an upload path or HTTP(S) URL`);
+    if (local) check(fs.existsSync(path.join(root, 'public', image.slice(1))), `Uploaded photo missing from public folder: ${image}`);
+  }
+}
 const route = (url) => typeof url==='string' && url.startsWith('/') && !url.startsWith('//') && /^\/[\w\-/]*$/.test(url);
 for (const f of ['name','headline','intro','about','siteTagline','footerLine']) check(typeof site[f]==='string', `Identity.${f} must be text`);
 for (const [field, arr, href] of [['navigation',site.navigation,'href'],['folders',site.folders,'href'],['favoritesShelves',site.favoritesShelves,'href']]) {
