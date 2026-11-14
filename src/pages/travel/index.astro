@@ -14,9 +14,10 @@ const countryPaths = countries.map((country:any)=>({
   geometry: draw(country) || ''
 })).filter((country:any)=>country.geometry);
 const norm = (s:string)=>s.trim().toLocaleLowerCase('en').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-const aliases:Record<string,string> = {turkiye:'turkey',türkiye:'turkey',usa:'united states of america',us:'united states of america','united states':'united states of america',uk:'united kingdom'};
+const aliases:Record<string,string> = {turkiye:'turkey',türkiye:'turkey','n cyprus':'n. cyprus','north cyprus':'n. cyprus','northern cyprus':'n. cyprus',usa:'united states of america',us:'united states of america','united states':'united states of america',uk:'united kingdom'};
 const publishedList = travel.visitedCountries.split(/[,;\n]+/).map(norm).filter(Boolean).map(x=>aliases[x] || x);
 const visited = new Set(publishedList);
+const europeCenter = projection([15, 51]) || [500, 270];
 const selected = countryPaths.filter((country:any)=>visited.has(norm(country.name))).map((country:any)=>country.name).sort();
 const travelStyle = [
   '--travel-visited:'+editorColor(travel.visitedColor),
@@ -36,9 +37,18 @@ const travelStyle = [
           <span>✳ marked countries: <strong id="travel-count">{selected.length}</strong></span>
           <button id="travel-edit-toggle" type="button" aria-pressed="false">✎ edit map</button>
         </div>
+        <div class="travel-map-controls" role="group" aria-label="Map zoom and navigation controls">
+          <button id="travel-zoom-in" type="button" aria-label="Zoom in on map">＋ zoom in</button>
+          <button id="travel-zoom-out" type="button" aria-label="Zoom out on map">－ zoom out</button>
+          <button id="travel-zoom-europe" type="button" aria-label="Focus map on Europe">⌖ Europe</button>
+          <button id="travel-zoom-reset" type="button" aria-label="Show the whole world">↶ world</button>
+          <span id="travel-zoom-level" aria-live="polite">100%</span>
+        </div>
         <div class="travel-map-window">
-          <svg id="travel-map" class="travel-map" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Interactive world country map">
-            {countryPaths.map((country:any)=><path class="travel-country" d={country.geometry} data-country={country.name} data-visited={visited.has(norm(country.name)) ? 'true' : 'false'} tabindex="0" role="button" aria-label={country.name} aria-pressed={visited.has(norm(country.name)) ? 'true':'false'}><title>{country.name}</title></path>)}
+          <svg id="travel-map" class="travel-map" data-europe-x={europeCenter[0]} data-europe-y={europeCenter[1]} viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Zoomable world country map. Mouse wheel zooms, drag pans, pinch zooms on touch screens.">
+            <g id="travel-map-scene">
+              {countryPaths.map((country:any)=><path class="travel-country" d={country.geometry} data-country={country.name} data-visited={visited.has(norm(country.name)) ? 'true' : 'false'} tabindex="0" role="button" aria-label={country.name} aria-pressed={visited.has(norm(country.name)) ? 'true':'false'}><title>{country.name}</title></path>)}
+            </g>
           </svg>
         </div>
         <div class="travel-status" id="travel-status" aria-live="polite">hover or click a country to see its name.</div>
@@ -63,6 +73,8 @@ const travelStyle = [
     <div class="travel-note">{travel.note}</div>
   </div>
   <script>
+    import { select } from 'd3-selection';
+    import { zoom, zoomIdentity } from 'd3-zoom';
     const map = document.querySelector<SVGSVGElement>('#travel-map');
     const toggle = document.querySelector<HTMLButtonElement>('#travel-edit-toggle');
     const editor = document.querySelector<HTMLElement>('#travel-editor');
@@ -72,6 +84,30 @@ const travelStyle = [
     const empty = document.querySelector<HTMLElement>('#travel-empty');
     const exportArea = document.querySelector<HTMLTextAreaElement>('#travel-export');
     const search = document.querySelector<HTMLInputElement>('#travel-country-search');
+    if (map) {
+      const scene = map.querySelector<SVGGElement>('#travel-map-scene');
+      const level = document.querySelector<HTMLElement>('#travel-zoom-level');
+      const zoomBehavior = zoom<SVGSVGElement, unknown>()
+        .scaleExtent([1, 12])
+        .translateExtent([[0, 0], [1000, 540]])
+        .extent([[0, 0], [1000, 540]])
+        .on('zoom', (event) => {
+          scene?.setAttribute('transform', event.transform.toString());
+          if (level) level.textContent = Math.round(event.transform.k * 100) + '%';
+        });
+      const svg = select(map);
+      svg.call(zoomBehavior);
+      const applyZoom = (scale: number) => svg.call(zoomBehavior.scaleBy, scale);
+      document.querySelector('#travel-zoom-in')?.addEventListener('click', () => applyZoom(1.6));
+      document.querySelector('#travel-zoom-out')?.addEventListener('click', () => applyZoom(1 / 1.6));
+      document.querySelector('#travel-zoom-reset')?.addEventListener('click', () => svg.call(zoomBehavior.transform, zoomIdentity));
+      document.querySelector('#travel-zoom-europe')?.addEventListener('click', () => {
+        const x = Number(map.dataset.europeX) || 500;
+        const y = Number(map.dataset.europeY) || 270;
+        const k = 4;
+        svg.call(zoomBehavior.transform, zoomIdentity.translate(500 - x*k, 270 - y*k).scale(k));
+      });
+    }
     if (map && toggle && editor && counter && status && list && empty && exportArea && search) {
       const paths = Array.from(map.querySelectorAll<SVGPathElement>('.travel-country'));
       const published = new Set(paths.filter(p=>p.dataset.visited === 'true').map(p=>p.dataset.country || ''));

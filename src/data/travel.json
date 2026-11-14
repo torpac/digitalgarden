@@ -1,11 +1,11 @@
 {
-  "visitedCountries": "",
+  "visitedCountries": "Austria, Belgium, Bulgaria, Cyprus, Czechia, Estonia, Finland, France, Germany, Greece, Hungary, N. Cyprus, Netherlands, Romania, Slovakia, Slovenia, Turkey",
   "visitedColor": "#cdc4ed",
   "landColor": "#384762",
   "seaColor": "#162238",
   "outlineColor": "#62738f",
   "mapHeading": "world_map.svg",
-  "mapDescription": "click a country to see its name. use edit mode to select places and copy the list into Pages CMS.",
+  "mapDescription": "countries i've visited are highlighted. scroll to zoom, drag to move, or use the buttons. select countries in edit mode and copy the list into Pages CMS to publish changes.",
   "selectedHeading": "visited countries",
   "emptyText": "nothing marked yet. the world is waiting.",
   "note": "my map, my memories. somewhere on this planet."

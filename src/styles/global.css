@@ -163,3 +163,12 @@ body.airy .content-page { padding-top:36px;padding-bottom:65px }
 @media(max-width:700px){.gallery-columns{columns:2 150px}.gallery-tile{margin-bottom:11px}.travel-panel-body{padding:9px}.travel-visited-box ul{columns:1}}
 @media(max-width:420px){.gallery-columns{columns:1}.gallery-tile{max-width:100%}}
 @media(prefers-reduced-motion:reduce){.gallery-tile,.travel-country{transition:none}}
+
+/* Zoomable travel atlas controls. */
+.travel-map-controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:12px 0 9px}
+.travel-map-controls button{font:11px var(--mono);background:var(--panel-light);color:var(--text);border:1px solid var(--line);padding:7px 10px;cursor:pointer}
+.travel-map-controls button:hover,.travel-map-controls button:focus-visible{border-color:var(--lavender);background:var(--line-soft)}
+.travel-map-controls span{font:11px var(--mono);color:var(--lavender);margin-left:auto;min-width:44px;text-align:right}
+.travel-map{touch-action:none;user-select:none;cursor:grab}
+.travel-map:active{cursor:grabbing}
+.travel-map .travel-country{cursor:inherit}
