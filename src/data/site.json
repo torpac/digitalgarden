@@ -16,10 +16,9 @@
   "nowPlaying": "nothing recently :(",
   "nowReading": "volvo lastvagnar",
   "nowListening": "my massive playlist 🔥",
-  "footerLine": "made on earth, somewhere under the stars.",
+  "footerLine": "yo whats up",
   "footerCopyrightNote": "best viewed with curiosity",
   "footerMark": "✧",
-  "sidebarSkyTitle": "✳ night_sky.gif",
   "sidebarSkyCaption": "a little lost in space ☾",
   "sidebarSkyAlt": "A quiet snowy night with a glowing moon",
   "sidebarExplorerTitle": "⌁ explorer.exe",
@@ -27,6 +26,7 @@
   "sidebarSocialTitle": "↗ elsewhere",
   "sidebarStamp": "✳ under construction, always.",
   "sidebarSocialMissing": "[add link]",
+  "faviconImage": "/uploads/mvimg20260802225439.jpg",
   "currentlyLabels": {
     "watching": "watching",
     "playing": "playing",
@@ -36,10 +36,12 @@
   "socialLinks": [
     {
       "label": "instagram",
+      "url": "https://www.instagram.com/toprak_tuccar/",
       "enabled": true
     },
     {
       "label": "linkedin",
+      "url": "https://www.linkedin.com/in/ygztoprak/",
       "enabled": true
     }
   ],
