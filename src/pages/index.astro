@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, copy, appearance, publicFolders, publicShelves, publicSocials } from '../lib/settings';
+import { getCollection } from 'astro:content';
+import { path, mediaUrl, safeExternalUrl, sortRanked } from '../lib/paths';
+const [films, games, series, books, postEntries, pinEntries] = await Promise.all([
+  getCollection('films', ({ data }) => !data.draft),
+  getCollection('games', ({ data }) => !data.draft),
+  getCollection('series', ({ data }) => !data.draft),
+  getCollection('books', ({ data }) => !data.draft),
+  getCollection('posts', ({ data }) => !data.draft),
+  getCollection('pins', ({ data }) => !data.draft),
+]);
+const posts = [...postEntries].sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf());
+const pins = [...pinEntries].sort((a,b) => a.data.order - b.data.order);
+const collections = { films: sortRanked(films), games: sortRanked(games), series: sortRanked(series), books: sortRanked(books) };
+const heroPic = mediaUrl(site.heroImage);
+const text = copy.home;
+const sections = site.homeSections.filter((s) => s.enabled);
+---
+<BaseLayout>
+  <div class="home shell">
+    {sections.map(({ section }) => (
+      <>
+        {section === 'hero' && appearance.visibility.hero && <section class="hero-panel rise-on-scroll">
+          <div class="hero-copy">
+            {text.heroEyebrow && <div class="eyebrow">{text.heroEyebrow}</div>}
+            <h1>{site.headline}</h1>
+            <p>{site.intro}</p>
+            <div class="hero-actions">
+              {text.heroPrimaryLabel && <a href={path('/posts/')}>{text.heroPrimaryLabel}</a>}
+              {text.heroSecondaryLabel && <a href={path('/about/')}>{text.heroSecondaryLabel}</a>}
+            </div>
+          </div>
+          <div class="hero-celestial" role="img" aria-label="Decorative winter night sky">
+            {heroPic ? <img class="hero-upload" src={heroPic} alt="" /> : <>
+              {appearance.effects.moon && <div class="hero-moon"></div>}
+              <span class="hero-star s1">✧</span><span class="hero-star s2">✳</span><span class="hero-star s3">✦</span>
+              <div class="hero-hill"></div>
+            </>}
+            {text.heroSkyCaption && <span class="hero-celestial-text">{text.heroSkyCaption}</span>}
+          </div>
+        </section>}
+        {section === 'folders_recent' && (appearance.visibility.folderPanel || appearance.visibility.recentPanel) && <div class="home-content-grid">
+          {appearance.visibility.folderPanel && <section class="web-panel rise-on-scroll">
+            <div class="panel-title"><span>{text.foldersTitle}</span><small>{text.foldersMeta}</small></div>
+            <div class="panel-body">
+              <h2 class="small-title">{text.foldersHeading}</h2>
+              <div class="folder-grid">
+                {publicFolders.map((f,i) => <a class="folder-tile" href={path(f.href)}><span class="folder-ico">{f.symbol}</span><strong>{String(i+1).padStart(2,'0')}_{f.name}/</strong><small>{f.description}</small></a>)}
+              </div>
+            </div>
+          </section>}
+          {appearance.visibility.recentPanel && <section class="web-panel rise-on-scroll">
+            <div class="panel-title"><span>{text.recentTitle}</span><small>{text.recentMeta}</small></div>
+            <div class="panel-body">
+              <h2 class="small-title">{text.recentHeading}</h2>
+              <div class="recent-posts">
+                {posts.slice(0,3).map((post) => <a href={path(`/posts/${post.id}/`)}>
+                  <span>{post.data.date.toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'})}</span>
+                  <strong>{post.data.title}</strong><small>{copy.posts[`${post.data.stage}Label` as keyof typeof copy.posts]} ↗</small>
+                </a>)}
+                {posts.length === 0 && <p>{text.recentEmpty}</p>}
+              </div>
+              <a class="text-link" href={path('/posts/')}>{text.recentLink}</a>
+            </div>
+          </section>}
+        </div>}
+        {section === 'favorites' && appearance.visibility.favoritesPanel && <section class="web-panel rise-on-scroll">
+          <div class="panel-title"><span>{text.favoritesTitle}</span><small>{text.favoritesMeta}</small></div>
+          <div class="panel-body">
+            <h2 class="small-title">{text.favoritesHeading}</h2>
+            <div class="toplists-grid">
+              {publicShelves.map((shelf) => <div class="toplist">
+                <div class="toplist-heading"><span>{shelf.symbol} {shelf.name}</span><a href={path(shelf.href)}>{text.favoritesLink}</a></div>
+                {collections[shelf.name as keyof typeof collections].slice(0,3).map((entry,i) => <a class="top-item" href={path(`${shelf.href}${entry.id}/`)}><b>{String(entry.data.rank ?? i+1).padStart(2,'0')}</b><span>{entry.data.title}</span><em>{entry.data.rating !== undefined ? `${entry.data.rating}${copy.media.ratingSuffix}` : '↗'}</em></a>)}
+              </div>)}
+            </div>
+          </div>
+        </section>}
+        {section === 'pinboard' && appearance.visibility.pinboardPanel && <section class="web-panel rise-on-scroll">
+          <div class="panel-title"><span>{text.pinboardTitle}</span><small>{text.pinboardMeta}</small></div>
+          <div class="panel-body"><div class="pinboard-grid">
+            {pins.map((pin) => {
+              const href = safeExternalUrl(pin.data.link);
+              const pic = mediaUrl(pin.data.image);
+              return <div class="pin-item">
+                {pic && <img src={pic} alt="" loading="lazy" />}
+                <strong>{href ? <a href={href} target="_blank" rel="noopener noreferrer">{pin.data.title} ↗</a> : pin.data.title}</strong>
+                {pin.data.description && <p>{pin.data.description}</p>}
+                {pin.data.example && <span class="sample-pill">{copy.media.sampleLabel}</span>}
+              </div>;
+            })}
+          </div></div>
+        </section>}
+        {section === 'goodbye' && appearance.visibility.homeGoodbye && <div class="home-goodbye">{text.goodbyeText} {publicSocials.map((social) => {
+          const url = safeExternalUrl(social.url);
+          return url && <a href={url} target="_blank" rel="noopener noreferrer">{social.label} ↗</a>;
+        })}</div>}
+      </>
+    ))}
+  </div>
+</BaseLayout>

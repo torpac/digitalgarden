@@ -1,0 +1,12 @@
+---
+import { site, publicSocials } from '../lib/settings';
+import { safeExternalUrl } from '../lib/paths';
+---
+<footer class="site-footer">
+  <span>{site.footerMark} {site.footerLine}</span>
+  <span class="footer-social">{publicSocials.map((social) => {
+    const url = safeExternalUrl(social.url);
+    return url && <a href={url} target="_blank" rel="noopener noreferrer">{social.label} ↗</a>;
+  })}</span>
+  <span>© {new Date().getFullYear()} {site.name} · {site.footerCopyrightNote}</span>
+</footer>

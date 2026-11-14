@@ -1,0 +1,32 @@
+---
+import { mediaUrl } from '../lib/paths';
+import { copy } from '../lib/settings';
+interface Props {
+  type: string; title: string; description?: string; meta?: string;
+  rating?: number; rank?: number; cover?: string; tags?: string[];
+  example?: boolean; back: string;
+}
+const { type, title, description, meta, rating, rank, cover, tags = [], example, back } = Astro.props;
+const image = mediaUrl(cover);
+---
+<article class="detail-page shell narrow">
+  <a class="back-link" href={back}>{copy.media.backPrefix}{type}</a>
+  <header class="detail-heading">
+    <span class="eyebrow">{type}/ {copy.media.detailFileLabel} {example ? ` / ${copy.media.sampleLabel}` : ''}</span>
+    <div class:list={['detail-lead', { 'has-art': image }] }>
+      {image && <img class="detail-cover" src={image} alt={`${title} cover`} />}
+      <div>
+        <h1>{title}</h1>
+        {description && <p>{description}</p>}
+        <div class="detail-meta">
+          {rank !== undefined && <span>{copy.media.rankPrefix}{rank}</span>}
+          {meta && <span>{meta}</span>}
+          {rating !== undefined && <span>★ {rating}{copy.media.ratingSuffix}</span>}
+          {tags.map((tag) => <span>#{tag}</span>)}
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="prose"><slot /></div>
+  <footer class="detail-end">{copy.media.detailEnd}</footer>
+</article>

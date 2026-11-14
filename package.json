@@ -1,0 +1,19 @@
+{
+  "name": "toprak-digital-garden-v4",
+  "version": "4.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "validate": "node scripts/validate-content.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.16.0"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}

@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionIntro from '../components/SectionIntro.astro';
+import { site, copy, publicSocials } from '../lib/settings';
+import { safeExternalUrl } from '../lib/paths';
+---
+<BaseLayout title={copy.pages.about.title}>
+  <div class="shell narrow content-page">
+    <SectionIntro {...copy.pages.about} />
+    <div class="about-letter rise-on-scroll">
+      <span class="letter-date">{site.aboutMeta}</span>
+      <p>{site.about}</p>
+      {site.aboutExtra && <p>{site.aboutExtra}</p>}
+      <div class="letter-signoff">{site.aboutSignoff}<br /><strong>{site.name.toLowerCase()} ✳</strong></div>
+    </div>
+    <div class="about-socials rise-on-scroll">
+      <span class="eyebrow">{site.sidebarSocialTitle}</span>
+      <div class="about-social-list">
+        {publicSocials.map((social) => {
+          const url = safeExternalUrl(social.url);
+          return url ? <a href={url} target="_blank" rel="noopener noreferrer">{social.label} ↗</a> : <span>{social.label} {site.sidebarSocialMissing}</span>;
+        })}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,60 @@
+---
+import CollectionCard from './CollectionCard.astro';
+import { path, sortRanked } from '../lib/paths';
+import { copy } from '../lib/settings';
+interface Item {
+  id: string;
+  data: { title: string; rank?: number; rating?: number; description?: string;
+    year?: number; platform?: string; author?: string; hours?: number; cover?: string; example?: boolean; };
+}
+interface Props { entries: Item[]; kind: 'films' | 'games' | 'series' | 'books'; }
+const { entries, kind } = Astro.props;
+const ordered = sortRanked(entries);
+---
+<div class="ranking-board" data-ranking-board>
+  <div class="ranking-toolbar">
+    <span>{ordered.length} {copy.media.rankingCountSuffix}</span>
+    <div class="ranking-controls" aria-label="Sort this collection">
+      <button type="button" class="sort-button" data-sort="rank" aria-pressed="true">{copy.media.sortByRank}</button>
+      <button type="button" class="sort-button" data-sort="rating" aria-pressed="false">{copy.media.sortByRating}</button>
+      <button type="button" class="sort-button" data-sort="title" aria-pressed="false">{copy.media.sortByTitle}</button>
+    </div>
+  </div>
+  <div class="ranking-list" data-ranking-list>
+    {ordered.map((entry) => <div class="ranking-item" data-rank={entry.data.rank ?? 999999} data-rating={entry.data.rating ?? -1} data-title={entry.data.title.toLowerCase()}>
+      <CollectionCard
+        href={path(`/${kind}/${entry.id}/`)} title={entry.data.title}
+        description={entry.data.description} cover={entry.data.cover}
+        rank={entry.data.rank} rating={entry.data.rating}
+        meta={[entry.data.year, entry.data.platform, entry.data.author, entry.data.hours !== undefined ? `${entry.data.hours}${copy.media.hoursPlayedSuffix}` : undefined].filter(Boolean).join(' · ')}
+        kind={kind} example={entry.data.example}
+      />
+    </div>)}
+  </div>
+  {ordered.length === 0 && <p class="empty-state">{copy.media.empty}</p>}
+  {copy.media.rankingHelp && <p class="edit-help">{copy.media.rankingHelp}</p>}
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-ranking-board]').forEach((board) => {
+    const list = board.querySelector<HTMLElement>('[data-ranking-list]');
+    if (!list) return;
+    const buttons = board.querySelectorAll<HTMLButtonElement>('[data-sort]');
+    const compare = (a: HTMLElement, b: HTMLElement, mode: string) => {
+      const ra = Number(a.dataset.rank ?? 999999);
+      const rb = Number(b.dataset.rank ?? 999999);
+      const sa = Number(a.dataset.rating ?? -1);
+      const sb = Number(b.dataset.rating ?? -1);
+      const ta = a.dataset.title ?? '';
+      const tb = b.dataset.title ?? '';
+      if (mode === 'rating') return sb - sa || ra - rb || ta.localeCompare(tb);
+      if (mode === 'title') return ta.localeCompare(tb);
+      return ra - rb || sb - sa || ta.localeCompare(tb);
+    };
+    buttons.forEach((button) => button.addEventListener('click', () => {
+      const mode = button.dataset.sort ?? 'rank';
+      buttons.forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
+      Array.from(list.querySelectorAll<HTMLElement>('.ranking-item'))
+        .sort((a, b) => compare(a, b, mode)).forEach((item) => list.appendChild(item));
+    }));
+  });
+</script>

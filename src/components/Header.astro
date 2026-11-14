@@ -1,0 +1,23 @@
+---
+import { site, publicNavigation } from '../lib/settings';
+import { path, mediaUrl } from '../lib/paths';
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (url: string) => {
+  const target = path(url).replace(/\/$/, '') || '/';
+  return url === '/' ? current === target : current === target || current.startsWith(`${target}/`);
+};
+const logo = mediaUrl(site.brandImage);
+---
+<header class="site-header">
+  <div class="header-top">
+    <a class="brand" href={path('/')}>
+      {logo ? <img class="brand-image" src={logo} alt={site.name} /> : <><span aria-hidden="true">{site.brandMark}</span> {site.name.toLowerCase()}<span class="brand-cursor">{site.brandSuffix}</span></>}
+    </a>
+    {site.siteTagline && <div class="header-identity">{site.siteTagline}</div>}
+  </div>
+  <nav class="site-nav" aria-label="Main navigation">
+    {publicNavigation.map((item) => <a href={path(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>
+      {item.icon && <span aria-hidden="true">{item.icon} </span>}{item.label}
+    </a>)}
+  </nav>
+</header>

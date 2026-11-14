@@ -1,0 +1,102 @@
+{
+  "home": {
+    "heroEyebrow": "✳ you have reached the end of the internet . . . almost",
+    "heroPrimaryLabel": "enter the garden ↗",
+    "heroSecondaryLabel": "who am i?",
+    "heroSkyCaption": "somewhere beneath the stars · ✳ since 2026 ✳",
+    "foldersTitle": "📁 file explorer",
+    "foldersMeta": "index / 6 folders",
+    "foldersHeading": "where would you like to go?",
+    "recentTitle": "✳ recently planted",
+    "recentMeta": "garden.log",
+    "recentHeading": "latest posts",
+    "recentEmpty": "nothing planted yet. add your first post in Pages CMS.",
+    "recentLink": "wander through all posts ↗",
+    "favoritesTitle": "☆ top_shelves.dat",
+    "favoritesMeta": "these rankings will change",
+    "favoritesHeading": "my little favorites archive",
+    "favoritesLink": "open ↗",
+    "pinboardTitle": "✳ pinboard.htm",
+    "pinboardMeta": "small bits of the internet",
+    "goodbyeText": "✧ made by a human, for whoever finds this page."
+  },
+  "pages": {
+    "posts": {
+      "label": "00 / garden.log",
+      "title": "the digital garden.",
+      "description": "unfinished thoughts, tiny discoveries, longer essays, and things i'm learning out loud. not everything here has to be finished.",
+      "glyph": "✳"
+    },
+    "films": {
+      "label": "01 / films.dat",
+      "title": "films i keep close",
+      "description": "a personal film diary: posters, ratings, rankings and reviews.",
+      "glyph": "◈"
+    },
+    "games": {
+      "label": "02 / save_files",
+      "title": "games & little worlds",
+      "description": "a carefully curated shelf of games that mattered to me.",
+      "glyph": "✳"
+    },
+    "series": {
+      "label": "03 / tv_archive",
+      "title": "series i remember",
+      "description": "shows, miniseries and stories worth revisiting.",
+      "glyph": "☾"
+    },
+    "books": {
+      "label": "04 / bookshelf",
+      "title": "books & margins.",
+      "description": "a shelf of books, with cover art, thoughts, ratings and the ones i'd read again.",
+      "glyph": "✎"
+    },
+    "music": {
+      "label": "05 / mixtapes",
+      "title": "the mixtape shelf.",
+      "description": "spotify playlists i chose to keep here. no account syncing, just embedded mixtapes.",
+      "glyph": "♫"
+    },
+    "about": {
+      "label": "who's behind the screen?",
+      "title": "hello again.",
+      "description": "a little note from the person running this place.",
+      "glyph": "✷"
+    }
+  },
+  "posts": {
+    "seedlingLegend": "✳ seedling = just an idea",
+    "growingLegend": "❋ growing = still figuring it out",
+    "evergreenLegend": "✦ evergreen = something i'd keep",
+    "seedlingLabel": "✳ seedling",
+    "growingLabel": "❋ growing",
+    "evergreenLabel": "✦ evergreen",
+    "empty": "your garden is waiting for its first post.",
+    "coverPlaceholder": "post cover",
+    "backLabel": "← back to the garden",
+    "postEnd": "✳ this thought can always grow.",
+    "postEndLink": "back to garden ↗",
+    "postDetailPrefix": "✳ garden"
+  },
+  "media": {
+    "rankingCountSuffix": "entries · personal ranking",
+    "sortByRank": "rank",
+    "sortByRating": "rating",
+    "sortByTitle": "a–z",
+    "empty": "this shelf is empty. add your first entry. ✳",
+    "rankingHelp": "✎ edit this list and upload covers through Pages CMS. Change the rank field to rearrange favorites.",
+    "coverPlaceholder": "add cover",
+    "sampleLabel": "sample / edit me",
+    "rankPrefix": "rank #",
+    "ratingSuffix": "/10",
+    "detailFileLabel": "entry.html",
+    "backPrefix": "← back to ",
+    "detailEnd": "✳ end of file · thanks for reading",
+    "hoursPlayedSuffix": "h played"
+  },
+  "music": {
+    "filePrefix": "mixtape",
+    "placeholder": "add your Spotify playlist URL in Pages CMS to play it here.",
+    "empty": "nothing on the turntable yet."
+  }
+}

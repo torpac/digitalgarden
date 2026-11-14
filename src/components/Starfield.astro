@@ -1,0 +1,7 @@
+---
+import { appearance } from '../lib/settings';
+---
+{(appearance.effects.stars || appearance.effects.snow) && <div class="ambient-sky" aria-hidden="true">
+  {appearance.effects.stars && <div class="sky-stars"></div>}
+  {appearance.effects.snow && <><div class="sky-snow sky-snow-a"></div><div class="sky-snow sky-snow-b"></div></>}
+</div>}

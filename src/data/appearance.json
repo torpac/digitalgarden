@@ -1,0 +1,52 @@
+{
+  "colors": {
+    "sky": "#10182a",
+    "outer": "#091122",
+    "panel": "#1b263b",
+    "panelLight": "#223149",
+    "deep": "#141e30",
+    "line": "#44546b",
+    "lineSoft": "#34435a",
+    "text": "#e3e8f0",
+    "muted": "#a2aec1",
+    "faint": "#798aa4",
+    "blue": "#b8cbeb",
+    "lavender": "#d0c3eb",
+    "green": "#b9d8c3",
+    "selection": "#7185b2",
+    "backgroundGlow": "#1a2b4d"
+  },
+  "fonts": {
+    "body": "verdana",
+    "heading": "georgia",
+    "interface": "consolas"
+  },
+  "effects": {
+    "stars": true,
+    "snow": true,
+    "moon": true,
+    "scrollReveal": true,
+    "cursorBlink": true
+  },
+  "visibility": {
+    "sidebar": true,
+    "skyWidget": true,
+    "explorerWidget": true,
+    "currentlyWidget": true,
+    "socialWidget": true,
+    "sidebarStamp": true,
+    "hero": true,
+    "folderPanel": true,
+    "recentPanel": true,
+    "favoritesPanel": true,
+    "pinboardPanel": true,
+    "homeGoodbye": true,
+    "footer": true
+  },
+  "layout": {
+    "maxWidth": 1120,
+    "sidebarWidth": 216,
+    "cornerStyle": "square",
+    "density": "comfortable"
+  }
+}

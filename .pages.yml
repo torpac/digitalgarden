@@ -1,0 +1,1091 @@
+# Edit every word, link, collection and common design setting through Pages CMS.
+media:
+  input: public/uploads
+  output: /uploads
+  rename: safe
+  categories:
+  - image
+content:
+- name: site
+  label: 01 — Identity, socials, navigation, text
+  type: file
+  path: src/data/site.json
+  format: json
+  operations:
+    delete: false
+  fields:
+  - name: name
+    label: Your display name
+    type: string
+  - name: headline
+    label: Homepage main headline
+    type: string
+  - name: intro
+    label: Homepage description
+    type: text
+  - name: about
+    label: About main paragraph
+    type: text
+  - name: aboutExtra
+    label: About extra paragraph
+    type: text
+  - name: aboutSignoff
+    label: About sign-off
+    type: string
+  - name: aboutMeta
+    label: About card tiny heading
+    type: string
+  - name: siteTagline
+    label: Top right header sentence
+    type: string
+  - name: windowTitle
+    label: Browser-style top window label
+    type: string
+  - name: brandSuffix
+    label: Character after your name
+    type: string
+  - name: brandMark
+    label: Symbol before your name
+    type: string
+  - name: browserTitleSuffix
+    label: Browser tab description
+    type: string
+  - name: statusLine
+    label: Site status message
+    type: string
+  - name: nowWatching
+    label: Currently watching
+    type: string
+  - name: nowPlaying
+    label: Currently playing
+    type: string
+  - name: nowReading
+    label: Currently reading
+    type: string
+  - name: nowListening
+    label: Currently listening
+    type: string
+  - name: footerLine
+    label: Footer message
+    type: string
+  - name: footerCopyrightNote
+    label: Copyright line additional text
+    type: string
+  - name: footerMark
+    label: Footer symbol
+    type: string
+  - name: sidebarSkyTitle
+    label: Sky widget title
+    type: string
+  - name: sidebarSkyCaption
+    label: Sky widget caption
+    type: string
+  - name: sidebarSkyAlt
+    label: Sky image description
+    type: string
+  - name: sidebarExplorerTitle
+    label: Explorer widget title
+    type: string
+  - name: sidebarCurrentTitle
+    label: Currently widget title
+    type: string
+  - name: sidebarSocialTitle
+    label: Socials widget title
+    type: string
+  - name: sidebarStamp
+    label: Sidebar tiny stamp
+    type: string
+  - name: sidebarSocialMissing
+    label: Text when a social link is missing
+    type: string
+  - name: faviconImage
+    label: Browser tab icon image
+    type: image
+  - name: brandImage
+    label: Image logo (optional, otherwise text)
+    type: image
+  - name: heroImage
+    label: Homepage sky panel image (optional)
+    type: image
+  - name: sidebarSkyImage
+    label: Sidebar night-sky image (optional)
+    type: image
+  - name: currentlyLabels
+    label: Currently field captions
+    type: object
+    fields:
+    - name: watching
+      label: Watching
+      type: string
+    - name: playing
+      label: Playing
+      type: string
+    - name: reading
+      label: Reading
+      type: string
+    - name: listening
+      label: Listening
+      type: string
+  - name: socialLinks
+    label: Social links — add, reorder, remove
+    type: object
+    list:
+      collapsible:
+        collapsed: true
+        summary: '{label}'
+    fields:
+    - name: label
+      label: Button text
+      type: string
+    - name: url
+      label: Full HTTPS profile URL
+      type: string
+    - name: enabled
+      label: Show link
+      type: boolean
+  - name: navigation
+    label: Main top navigation — re-order / rename / hide
+    type: object
+    list:
+      collapsible:
+        collapsed: true
+        summary: '{label}'
+    fields:
+    - name: label
+      label: Link text
+      type: string
+    - name: href
+      label: Internal path, e.g. /films/
+      type: string
+    - name: icon
+      label: Optional leading symbol
+      type: string
+    - name: enabled
+      label: Show in header
+      type: boolean
+  - name: folders
+    label: Homepage folders — re-order / edit / hide
+    type: object
+    list:
+      collapsible:
+        collapsed: true
+        summary: '{name}'
+    fields:
+    - name: name
+      label: Folder name
+      type: string
+    - name: href
+      label: Internal path
+      type: string
+    - name: symbol
+      label: Symbol
+      type: string
+    - name: description
+      label: Subtitle
+      type: string
+    - name: enabled
+      label: Show folder
+      type: boolean
+  - name: favoritesShelves
+    label: Homepage ranking categories — re-order / hide
+    type: object
+    list:
+      collapsible:
+        collapsed: true
+        summary: '{name}'
+    fields:
+    - name: name
+      label: Shelf name (films, games, series, books)
+      type: string
+    - name: href
+      label: Internal path
+      type: string
+    - name: symbol
+      label: Symbol
+      type: string
+    - name: enabled
+      label: Show shelf
+      type: boolean
+  - name: homeSections
+    label: Homepage section order — rearrange or hide groups
+    type: object
+    list:
+      collapsible:
+        collapsed: true
+        summary: '{section}'
+    fields:
+    - name: section
+      label: Section ID (hero / folders_recent / favorites / pinboard / goodbye)
+      type: select
+      options:
+        values:
+        - name: hero
+          label: Hero
+        - name: folders_recent
+          label: Folders recent
+        - name: favorites
+          label: Favorites
+        - name: pinboard
+          label: Pinboard
+        - name: goodbye
+          label: Goodbye
+    - name: enabled
+      label: Show section
+      type: boolean
+- name: copy
+  label: 02 — Every page heading and interface label
+  type: file
+  path: src/data/copy.json
+  format: json
+  operations:
+    delete: false
+  fields:
+  - name: home
+    label: Home
+    type: object
+    fields:
+    - name: heroEyebrow
+      label: Heroeyebrow
+      type: string
+    - name: heroPrimaryLabel
+      label: Heroprimarylabel
+      type: string
+    - name: heroSecondaryLabel
+      label: Herosecondarylabel
+      type: string
+    - name: heroSkyCaption
+      label: Heroskycaption
+      type: string
+    - name: foldersTitle
+      label: Folderstitle
+      type: string
+    - name: foldersMeta
+      label: Foldersmeta
+      type: string
+    - name: foldersHeading
+      label: Foldersheading
+      type: string
+    - name: recentTitle
+      label: Recenttitle
+      type: string
+    - name: recentMeta
+      label: Recentmeta
+      type: string
+    - name: recentHeading
+      label: Recentheading
+      type: string
+    - name: recentEmpty
+      label: Recentempty
+      type: string
+    - name: recentLink
+      label: Recentlink
+      type: string
+    - name: favoritesTitle
+      label: Favoritestitle
+      type: string
+    - name: favoritesMeta
+      label: Favoritesmeta
+      type: string
+    - name: favoritesHeading
+      label: Favoritesheading
+      type: string
+    - name: favoritesLink
+      label: Favoriteslink
+      type: string
+    - name: pinboardTitle
+      label: Pinboardtitle
+      type: string
+    - name: pinboardMeta
+      label: Pinboardmeta
+      type: string
+    - name: goodbyeText
+      label: Goodbyetext
+      type: string
+  - name: pages
+    label: Pages
+    type: object
+    fields:
+    - name: posts
+      label: Posts
+      type: object
+      fields:
+      - name: label
+        label: Label
+        type: string
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: glyph
+        label: Glyph
+        type: string
+    - name: films
+      label: Films
+      type: object
+      fields:
+      - name: label
+        label: Label
+        type: string
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: string
+      - name: glyph
+        label: Glyph
+        type: string
+    - name: games
+      label: Games
+      type: object
+      fields:
+      - name: label
+        label: Label
+        type: string
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: string
+      - name: glyph
+        label: Glyph
+        type: string
+    - name: series
+      label: Series
+      type: object
+      fields:
+      - name: label
+        label: Label
+        type: string
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: string
+      - name: glyph
+        label: Glyph
+        type: string
+    - name: books
+      label: Books
+      type: object
+      fields:
+      - name: label
+        label: Label
+        type: string
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: string
+      - name: glyph
+        label: Glyph
+        type: string
+    - name: music
+      label: Music
+      type: object
+      fields:
+      - name: label
+        label: Label
+        type: string
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: string
+      - name: glyph
+        label: Glyph
+        type: string
+    - name: about
+      label: About
+      type: object
+      fields:
+      - name: label
+        label: Label
+        type: string
+      - name: title
+        label: Title
+        type: string
+      - name: description
+        label: Description
+        type: string
+      - name: glyph
+        label: Glyph
+        type: string
+  - name: posts
+    label: Posts
+    type: object
+    fields:
+    - name: seedlingLegend
+      label: Seedlinglegend
+      type: string
+    - name: growingLegend
+      label: Growinglegend
+      type: string
+    - name: evergreenLegend
+      label: Evergreenlegend
+      type: string
+    - name: seedlingLabel
+      label: Seedlinglabel
+      type: string
+    - name: growingLabel
+      label: Growinglabel
+      type: string
+    - name: evergreenLabel
+      label: Evergreenlabel
+      type: string
+    - name: empty
+      label: Empty
+      type: string
+    - name: coverPlaceholder
+      label: Coverplaceholder
+      type: string
+    - name: backLabel
+      label: Backlabel
+      type: string
+    - name: postEnd
+      label: Postend
+      type: string
+    - name: postEndLink
+      label: Postendlink
+      type: string
+    - name: postDetailPrefix
+      label: Postdetailprefix
+      type: string
+  - name: media
+    label: Media
+    type: object
+    fields:
+    - name: rankingCountSuffix
+      label: Rankingcountsuffix
+      type: string
+    - name: sortByRank
+      label: Sortbyrank
+      type: string
+    - name: sortByRating
+      label: Sortbyrating
+      type: string
+    - name: sortByTitle
+      label: Sortbytitle
+      type: string
+    - name: empty
+      label: Empty
+      type: string
+    - name: rankingHelp
+      label: Rankinghelp
+      type: string
+    - name: coverPlaceholder
+      label: Coverplaceholder
+      type: string
+    - name: sampleLabel
+      label: Samplelabel
+      type: string
+    - name: rankPrefix
+      label: Rankprefix
+      type: string
+    - name: ratingSuffix
+      label: Ratingsuffix
+      type: string
+    - name: detailFileLabel
+      label: Detailfilelabel
+      type: string
+    - name: backPrefix
+      label: Backprefix
+      type: string
+    - name: detailEnd
+      label: Detailend
+      type: string
+    - name: hoursPlayedSuffix
+      label: Hoursplayedsuffix
+      type: string
+  - name: music
+    label: Music
+    type: object
+    fields:
+    - name: filePrefix
+      label: Fileprefix
+      type: string
+    - name: placeholder
+      label: Placeholder
+      type: string
+    - name: empty
+      label: Empty
+      type: string
+- name: appearance
+  label: 03 — Colors, fonts, layout and effects
+  type: file
+  path: src/data/appearance.json
+  format: json
+  operations:
+    delete: false
+  fields:
+  - name: colors
+    label: Colors (hex values)
+    type: object
+    fields:
+    - name: sky
+      label: Sky
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: outer
+      label: Outer
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: panel
+      label: Panel
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: panelLight
+      label: Panellight
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: deep
+      label: Deep
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: line
+      label: Line
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: lineSoft
+      label: Linesoft
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: text
+      label: Text
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: muted
+      label: Muted
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: faint
+      label: Faint
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: blue
+      label: Blue
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: lavender
+      label: Lavender
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: green
+      label: Green
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: selection
+      label: Selection
+      type: string
+      description: 'Hex color such as #aabbcc'
+    - name: backgroundGlow
+      label: Background glow
+      type: string
+      description: 'Hex color such as #aabbcc'
+  - name: fonts
+    label: Fonts
+    type: object
+    fields:
+    - name: body
+      label: Body
+      type: select
+      options:
+        values:
+        - name: verdana
+          label: Verdana
+        - name: inter
+          label: Inter
+        - name: system
+          label: System
+        - name: georgia
+          label: Georgia
+    - name: heading
+      label: Heading
+      type: select
+      options:
+        values:
+        - name: georgia
+          label: Georgia
+        - name: times
+          label: Times
+        - name: verdana
+          label: Verdana
+        - name: system
+          label: System
+    - name: interface
+      label: Interface
+      type: select
+      options:
+        values:
+        - name: consolas
+          label: Consolas
+        - name: courier
+          label: Courier
+        - name: system
+          label: System
+  - name: effects
+    label: Animation & atmosphere
+    type: object
+    fields:
+    - name: stars
+      label: Stars
+      type: boolean
+    - name: snow
+      label: Snow
+      type: boolean
+    - name: moon
+      label: Moon
+      type: boolean
+    - name: scrollReveal
+      label: Scroll reveal
+      type: boolean
+    - name: cursorBlink
+      label: Cursor blink
+      type: boolean
+  - name: visibility
+    label: Which panels appear
+    type: object
+    fields:
+    - name: sidebar
+      label: Sidebar
+      type: boolean
+    - name: skyWidget
+      label: Skywidget
+      type: boolean
+    - name: explorerWidget
+      label: Explorerwidget
+      type: boolean
+    - name: currentlyWidget
+      label: Currentlywidget
+      type: boolean
+    - name: socialWidget
+      label: Socialwidget
+      type: boolean
+    - name: sidebarStamp
+      label: Sidebarstamp
+      type: boolean
+    - name: hero
+      label: Hero
+      type: boolean
+    - name: folderPanel
+      label: Folderpanel
+      type: boolean
+    - name: recentPanel
+      label: Recentpanel
+      type: boolean
+    - name: favoritesPanel
+      label: Favoritespanel
+      type: boolean
+    - name: pinboardPanel
+      label: Pinboardpanel
+      type: boolean
+    - name: homeGoodbye
+      label: Homegoodbye
+      type: boolean
+    - name: footer
+      label: Footer
+      type: boolean
+  - name: layout
+    label: Layout preferences
+    type: object
+    fields:
+    - name: maxWidth
+      label: Main window max width in px
+      type: number
+    - name: sidebarWidth
+      label: Sidebar width in px
+      type: number
+    - name: cornerStyle
+      label: Corner style
+      type: select
+      options:
+        values:
+        - name: square
+          label: Old internet squared
+        - name: soft
+          label: Soft corners
+        - name: rounded
+          label: Rounded
+    - name: density
+      label: Spacing
+      type: select
+      options:
+        values:
+        - name: compact
+          label: Compact
+        - name: comfortable
+          label: Comfortable
+        - name: airy
+          label: Airy
+- name: posts
+  label: ✳ Garden / Posts
+  type: collection
+  path: src/content/posts
+  format: yaml-frontmatter
+  filename: '{title}.md'
+  view:
+    primary: title
+    fields:
+    - title
+    - date
+    - stage
+    - draft
+    default:
+      sort: date
+      order: desc
+  fields:
+  - name: title
+    label: Post title
+    type: string
+    required: true
+  - name: date
+    label: Published date
+    type: date
+    required: true
+  - name: updated
+    label: Last updated (optional)
+    type: date
+  - name: description
+    label: Short description
+    type: text
+  - name: cover
+    label: Cover image (upload or choose)
+    type: image
+  - name: tags
+    label: Tags / topics
+    type: string
+    list: true
+  - name: stage
+    label: How developed is this idea?
+    type: select
+    options:
+      values:
+      - name: seedling
+        label: ✳ Seedling — new idea
+      - name: growing
+        label: ❋ Growing — work in progress
+      - name: evergreen
+        label: ✦ Evergreen — more developed
+  - name: featured
+    label: Featured post
+    type: boolean
+  - name: draft
+    label: Hide from public website (draft)
+    type: boolean
+  - name: example
+    label: Placeholder example
+    type: boolean
+  - name: body
+    label: Your post
+    type: rich-text
+- name: films
+  label: ◈ Films / Reviews
+  type: collection
+  path: src/content/films
+  format: yaml-frontmatter
+  filename: '{title}.md'
+  view:
+    primary: title
+    fields:
+    - title
+    - rank
+    - rating
+    - year
+    - draft
+    default:
+      sort: rank
+      order: asc
+  fields:
+  - name: title
+    label: Film title
+    type: string
+    required: true
+  - name: cover
+    label: Movie poster / cover image
+    type: image
+  - name: rank
+    label: My rank (1 = top favorite)
+    type: number
+  - name: rating
+    label: Rating /10
+    type: number
+  - name: year
+    label: Release year
+    type: number
+  - name: watched
+    label: Date watched
+    type: date
+  - name: description
+    label: Short impression
+    type: text
+  - name: tags
+    label: Tags
+    type: string
+    list: true
+  - name: draft
+    label: Hide from public website (draft)
+    type: boolean
+  - name: example
+    label: Placeholder example
+    type: boolean
+  - name: body
+    label: Your film review
+    type: rich-text
+- name: series
+  label: ☾ Series / Reviews
+  type: collection
+  path: src/content/series
+  format: yaml-frontmatter
+  filename: '{title}.md'
+  view:
+    primary: title
+    fields:
+    - title
+    - rank
+    - rating
+    - year
+    - draft
+    default:
+      sort: rank
+      order: asc
+  fields:
+  - name: title
+    label: Series title
+    type: string
+    required: true
+  - name: cover
+    label: Show poster / cover image
+    type: image
+  - name: rank
+    label: My rank (1 = top favorite)
+    type: number
+  - name: rating
+    label: Rating /10
+    type: number
+  - name: year
+    label: First release year
+    type: number
+  - name: description
+    label: Short impression
+    type: text
+  - name: tags
+    label: Tags
+    type: string
+    list: true
+  - name: draft
+    label: Hide from public website (draft)
+    type: boolean
+  - name: example
+    label: Placeholder example
+    type: boolean
+  - name: body
+    label: Your series review
+    type: rich-text
+- name: games
+  label: ❋ Games / Reviews
+  type: collection
+  path: src/content/games
+  format: yaml-frontmatter
+  filename: '{title}.md'
+  view:
+    primary: title
+    fields:
+    - title
+    - rank
+    - rating
+    - platform
+    - draft
+    default:
+      sort: rank
+      order: asc
+  fields:
+  - name: title
+    label: Game title
+    type: string
+    required: true
+  - name: cover
+    label: Game cover / banner
+    type: image
+  - name: rank
+    label: My rank (1 = top favorite)
+    type: number
+  - name: rating
+    label: Rating /10
+    type: number
+  - name: year
+    label: Release year
+    type: number
+  - name: platform
+    label: Platform
+    type: string
+  - name: hours
+    label: Optional hours played
+    type: number
+  - name: description
+    label: Short impression
+    type: text
+  - name: tags
+    label: Tags
+    type: string
+    list: true
+  - name: draft
+    label: Hide from public website (draft)
+    type: boolean
+  - name: example
+    label: Placeholder example
+    type: boolean
+  - name: body
+    label: Your game review
+    type: rich-text
+- name: books
+  label: ✎ Books / Reviews
+  type: collection
+  path: src/content/books
+  format: yaml-frontmatter
+  filename: '{title}.md'
+  view:
+    primary: title
+    fields:
+    - title
+    - author
+    - rank
+    - rating
+    - draft
+    default:
+      sort: rank
+      order: asc
+  fields:
+  - name: title
+    label: Book title
+    type: string
+    required: true
+  - name: author
+    label: Author
+    type: string
+  - name: cover
+    label: Book cover image
+    type: image
+  - name: rank
+    label: My rank (1 = top favorite)
+    type: number
+  - name: rating
+    label: Rating /10
+    type: number
+  - name: year
+    label: Publication year
+    type: number
+  - name: finished
+    label: Date finished
+    type: date
+  - name: description
+    label: Short impression
+    type: text
+  - name: tags
+    label: Tags
+    type: string
+    list: true
+  - name: draft
+    label: Hide from public website (draft)
+    type: boolean
+  - name: example
+    label: Placeholder example
+    type: boolean
+  - name: body
+    label: Your book review
+    type: rich-text
+- name: playlists
+  label: ♫ Spotify playlists
+  type: collection
+  path: src/content/playlists
+  format: yaml-frontmatter
+  filename: '{title}.md'
+  view:
+    primary: title
+    fields:
+    - title
+    - mood
+    - order
+    - draft
+    default:
+      sort: order
+      order: asc
+  fields:
+  - name: title
+    label: Playlist title
+    type: string
+    required: true
+  - name: spotifyUrl
+    label: Spotify playlist share URL
+    type: string
+  - name: description
+    label: Why you made this playlist
+    type: text
+  - name: mood
+    label: Mood / season
+    type: string
+  - name: order
+    label: Order on page (0 first)
+    type: number
+  - name: draft
+    label: Hide from public website
+    type: boolean
+  - name: example
+    label: Placeholder example
+    type: boolean
+  - name: body
+    label: Optional notes
+    type: rich-text
+- name: pins
+  label: ✳ Homepage pinboard
+  type: collection
+  path: src/content/pins
+  format: yaml-frontmatter
+  filename: '{title}.md'
+  view:
+    primary: title
+    fields:
+    - title
+    - order
+    - draft
+    default:
+      sort: order
+      order: asc
+  fields:
+  - name: title
+    label: Pin title
+    type: string
+    required: true
+  - name: image
+    label: Photo or image (optional)
+    type: image
+  - name: description
+    label: Small caption
+    type: text
+  - name: link
+    label: Optional outside link (https)
+    type: string
+  - name: order
+    label: Order on homepage (0 first)
+    type: number
+  - name: draft
+    label: Hide from public website
+    type: boolean
+  - name: example
+    label: Placeholder example
+    type: boolean
+  - name: body
+    label: Optional extra text
+    type: rich-text
+- name: custom_css
+  label: Advanced — Custom CSS (code)
+  type: file
+  path: src/styles/custom.css
+  format: code
+  operations:
+    delete: false

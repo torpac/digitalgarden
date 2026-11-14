@@ -1,0 +1,27 @@
+---
+import { mediaUrl } from '../lib/paths';
+import { copy } from '../lib/settings';
+interface Props {
+  href: string; title: string; description?: string; meta?: string;
+  cover?: string; rank?: number; rating?: number; example?: boolean;
+  kind: 'films' | 'games' | 'series' | 'books';
+}
+const { href, title, description, meta, cover, rank, rating, example, kind } = Astro.props;
+const image = mediaUrl(cover);
+const marks = { films: '◈', games: '✳', series: '☾', books: '✎' };
+---
+<a class="rank-card" href={href}>
+  <div class="rank-position">{rank !== undefined ? `#${String(rank).padStart(2, '0')}` : '—'}</div>
+  <div class={`rank-thumbnail thumb-${kind}`}>
+    {image ? <img src={image} alt={`${title} cover`} loading="lazy" /> : <span class="cover-empty" aria-hidden="true"><b>{marks[kind]}</b><small>{copy.media.coverPlaceholder}</small></span>}
+  </div>
+  <div class="rank-info">
+    <h2>{title}</h2>
+    <div class="rank-subtitle">{meta && <span>{meta}</span>}{description && <span>{description}</span>}</div>
+    {example && <span class="sample-pill">{copy.media.sampleLabel}</span>}
+  </div>
+  <div class="rank-right">
+    {rating !== undefined && <span class="score-chip">{rating}<small>{copy.media.ratingSuffix}</small></span>}
+    <span class="rank-arrow" aria-hidden="true">↗</span>
+  </div>
+</a>

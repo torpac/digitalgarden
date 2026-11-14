@@ -1,0 +1,194 @@
+{
+  "name": "Toprak",
+  "headline": "welcome to my corner of the universe.",
+  "intro": "a personal digital garden for things i've watched, played, read, listened to, and learned along the way. feel free to wander.",
+  "about": "hi, i'm toprak. this is my little corner of the internet — part journal, part scrapbook, part collection of things i care about. it's always a work in progress.",
+  "statusLine": "this little corner is always under construction ✳",
+  "nowWatching": "[ add something you're watching ]",
+  "nowPlaying": "[ add something you're playing ]",
+  "nowReading": "[ add something you're reading ]",
+  "nowListening": "[ add something you're listening to ]",
+  "footerLine": "made on earth, somewhere under the stars.",
+  "siteTagline": "a little corner of the internet ✳ est. 2026",
+  "windowTitle": "✳ toprak://www/personal_garden/",
+  "brandSuffix": "_",
+  "brandMark": "✧",
+  "browserTitleSuffix": "personal digital garden",
+  "faviconImage": "",
+  "brandImage": "",
+  "heroImage": "",
+  "sidebarSkyImage": "",
+  "aboutExtra": "the lists are subjective. the order might change tomorrow. that's kind of the point.",
+  "aboutSignoff": "see you around,",
+  "aboutMeta": "about_me.txt / last updated whenever",
+  "footerCopyrightNote": "best viewed with curiosity",
+  "footerMark": "✧",
+  "sidebarSkyTitle": "✳ night_sky.gif",
+  "sidebarSkyCaption": "a little lost in space ☾",
+  "sidebarSkyAlt": "A quiet snowy night with a glowing moon",
+  "sidebarExplorerTitle": "⌁ explorer.exe",
+  "sidebarCurrentTitle": "◎ currently.txt",
+  "sidebarSocialTitle": "↗ elsewhere",
+  "sidebarStamp": "✳ under construction, always.",
+  "sidebarSocialMissing": "[add link]",
+  "currentlyLabels": {
+    "watching": "watching",
+    "playing": "playing",
+    "reading": "reading",
+    "listening": "listening"
+  },
+  "socialLinks": [
+    {
+      "label": "instagram",
+      "url": "",
+      "enabled": true
+    },
+    {
+      "label": "linkedin",
+      "url": "",
+      "enabled": true
+    }
+  ],
+  "navigation": [
+    {
+      "label": "home",
+      "href": "/",
+      "icon": "⌂",
+      "enabled": true
+    },
+    {
+      "label": "garden",
+      "href": "/posts/",
+      "icon": "",
+      "enabled": true
+    },
+    {
+      "label": "films",
+      "href": "/films/",
+      "icon": "",
+      "enabled": true
+    },
+    {
+      "label": "games",
+      "href": "/games/",
+      "icon": "",
+      "enabled": true
+    },
+    {
+      "label": "series",
+      "href": "/series/",
+      "icon": "",
+      "enabled": true
+    },
+    {
+      "label": "books",
+      "href": "/books/",
+      "icon": "",
+      "enabled": true
+    },
+    {
+      "label": "music",
+      "href": "/music/",
+      "icon": "",
+      "enabled": true
+    },
+    {
+      "label": "about",
+      "href": "/about/",
+      "icon": "",
+      "enabled": true
+    }
+  ],
+  "folders": [
+    {
+      "name": "garden",
+      "href": "/posts/",
+      "symbol": "✳",
+      "description": "posts & thoughts",
+      "enabled": true
+    },
+    {
+      "name": "films",
+      "href": "/films/",
+      "symbol": "◈",
+      "description": "movie diary",
+      "enabled": true
+    },
+    {
+      "name": "games",
+      "href": "/games/",
+      "symbol": "❋",
+      "description": "little worlds",
+      "enabled": true
+    },
+    {
+      "name": "series",
+      "href": "/series/",
+      "symbol": "☾",
+      "description": "episodes",
+      "enabled": true
+    },
+    {
+      "name": "books",
+      "href": "/books/",
+      "symbol": "✎",
+      "description": "bookshelf",
+      "enabled": true
+    },
+    {
+      "name": "music",
+      "href": "/music/",
+      "symbol": "♫",
+      "description": "playlists",
+      "enabled": true
+    }
+  ],
+  "favoritesShelves": [
+    {
+      "name": "films",
+      "href": "/films/",
+      "symbol": "◈",
+      "enabled": true
+    },
+    {
+      "name": "games",
+      "href": "/games/",
+      "symbol": "✳",
+      "enabled": true
+    },
+    {
+      "name": "series",
+      "href": "/series/",
+      "symbol": "☾",
+      "enabled": true
+    },
+    {
+      "name": "books",
+      "href": "/books/",
+      "symbol": "✎",
+      "enabled": true
+    }
+  ],
+  "homeSections": [
+    {
+      "section": "hero",
+      "enabled": true
+    },
+    {
+      "section": "folders_recent",
+      "enabled": true
+    },
+    {
+      "section": "favorites",
+      "enabled": true
+    },
+    {
+      "section": "pinboard",
+      "enabled": true
+    },
+    {
+      "section": "goodbye",
+      "enabled": true
+    }
+  ]
+}

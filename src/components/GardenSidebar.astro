@@ -1,0 +1,48 @@
+---
+import { site, appearance, publicNavigation, publicSocials } from '../lib/settings';
+import { path, safeExternalUrl, mediaUrl } from '../lib/paths';
+const sky = mediaUrl(site.sidebarSkyImage);
+const now = [
+  [site.currentlyLabels.watching,site.nowWatching],
+  [site.currentlyLabels.playing,site.nowPlaying],
+  [site.currentlyLabels.reading,site.nowReading],
+  [site.currentlyLabels.listening,site.nowListening],
+];
+---
+<aside class="garden-sidebar" aria-label="About this garden and quick links">
+  {appearance.visibility.skyWidget && <section class="side-widget">
+    <div class="widget-heading">{site.sidebarSkyTitle}</div>
+    <div class="widget-body">
+      <div class="moon-window" role="img" aria-label={site.sidebarSkyAlt}>
+        {sky ? <img class="sky-upload" src={sky} alt="" /> : <>
+          <span class="small-star one">✧</span><span class="small-star two">✳</span><span class="small-star three">·</span>
+          {appearance.effects.moon && <div class="moon-circle"></div>}
+          <div class="snowbank bank-one"></div><div class="snowbank bank-two"></div>
+        </>}
+      </div>
+      {site.sidebarSkyCaption && <div class="side-caption">{site.sidebarSkyCaption}</div>}
+    </div>
+  </section>}
+  {appearance.visibility.explorerWidget && <section class="side-widget">
+    <div class="widget-heading">{site.sidebarExplorerTitle}</div>
+    <div class="widget-body explorer">
+      {publicNavigation.filter((item) => item.href !== '/').map((item) => <a href={path(item.href)}>▸ {item.label}</a>)}
+    </div>
+  </section>}
+  {appearance.visibility.currentlyWidget && <section class="side-widget">
+    <div class="widget-heading">{site.sidebarCurrentTitle}</div>
+    <div class="widget-body current-mini">
+      {now.map(([label,text]) => <><span>{label}</span><p>{text}</p></>)}
+    </div>
+  </section>}
+  {appearance.visibility.socialWidget && <section class="side-widget">
+    <div class="widget-heading">{site.sidebarSocialTitle}</div>
+    <div class="widget-body side-socials">
+      {publicSocials.map((social) => {
+        const url = safeExternalUrl(social.url);
+        return url ? <a href={url} target="_blank" rel="noopener noreferrer">{social.label} ↗</a> : <span>{social.label} {site.sidebarSocialMissing}</span>;
+      })}
+    </div>
+  </section>}
+  {appearance.visibility.sidebarStamp && <div class="side-stamp">{site.sidebarStamp}</div>}
+</aside>

@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { copy } from '../../lib/settings';
+import SectionIntro from '../../components/SectionIntro.astro';
+import RankedCollection from '../../components/RankedCollection.astro';
+import { getCollection } from 'astro:content';
+const entries = await getCollection('films', ({ data }) => !data.draft);
+---
+<BaseLayout title={copy.pages.films.title}>
+  <div class="shell content-page">
+    <SectionIntro {...copy.pages.films} />
+    <RankedCollection entries={entries} kind="films" />
+  </div>
+</BaseLayout>

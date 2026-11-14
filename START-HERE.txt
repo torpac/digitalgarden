@@ -1,0 +1,20 @@
+TOPRAK'S DIGITAL GARDEN — V4 / EDITABLE EDITION
+
+1. Open this entire folder in VS Code.
+2. In the terminal run:
+   npm.cmd install
+   npm.cmd run validate
+   npm.cmd run dev
+3. Open http://localhost:4321/
+4. Upload to a GitHub public repository and enable GitHub Pages with GitHub Actions.
+5. After publishing, go to https://app.pagescms.org and sign in with GitHub.
+
+TO EDIT THE HEADER LINE FROM YOUR SCREENSHOT:
+CMS > 01 — Identity, socials, navigation, text > Top right header sentence
+
+OTHER AREAS:
+02 — Every page heading and interface label
+03 — Colors, fonts, layout and effects
+Garden / Posts, Books, Films, Series, Games, Spotify playlists, Homepage pinboard
+
+Full explanation: README.md

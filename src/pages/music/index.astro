@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { copy } from '../../lib/settings';
+import SectionIntro from '../../components/SectionIntro.astro';
+import { getCollection } from 'astro:content';
+import { spotifyEmbedUrl } from '../../lib/paths';
+const playlists = (await getCollection('playlists', ({ data }) => !data.draft)).sort((a,b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title));
+---
+<BaseLayout title={copy.pages.music.title}>
+  <div class="shell content-page">
+    <SectionIntro {...copy.pages.music} />
+    <div class="playlist-grid">
+      {playlists.map((playlist, i) => {
+        const embed = spotifyEmbedUrl(playlist.data.spotifyUrl);
+        return <article class="playlist-card rise-on-scroll">
+          <div class="playlist-card-top"><span>{copy.music.filePrefix}_{String(i+1).padStart(2,'0')}.mp3</span><span aria-hidden="true">♫</span></div>
+          <h2>{playlist.data.title}</h2>
+          {playlist.data.description && <p>{playlist.data.description}</p>}
+          {playlist.data.mood && <div class="playlist-mood">✧ {playlist.data.mood}</div>}
+          {embed ? <iframe title={`Spotify playlist: ${playlist.data.title}`} src={embed} width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> : <div class="playlist-empty"><span>♪</span><p>{copy.music.placeholder}</p></div>}
+          {playlist.data.example && <span class="sample-pill">{copy.media.sampleLabel}</span>}
+        </article>;
+      })}
+    </div>
+    {playlists.length === 0 && <p class="empty-state">{copy.music.empty}</p>}
+  </div>
+</BaseLayout>
