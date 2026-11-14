@@ -1,26 +1,22 @@
 {
   "name": "toprak",
-  "headline": "welcome to my corner of the universe.",
-  "intro": "a personal digital garden for things i've watched, played, read, listened to, and learned along the way. feel free to wander.",
+  "headline": "welcome to my digital garden!",
+  "intro": "a personal digital garden because i wanted a distraction free platform i could share my own thoughts on",
   "about": "hi, i'm toprak. this is my little corner of the internet — part journal, part scrapbook, part collection of things i care about. it's always a work in progress.",
+  "aboutExtra": "the lists are subjective. the order might change tomorrow. that's kind of the point.",
+  "aboutSignoff": "see you around,",
+  "aboutMeta": "about_me.txt / last updated whenever",
+  "siteTagline": "a little corner of the internet ✳ est. 2026",
+  "windowTitle": "✳ toprak://www/personal_garden/",
+  "brandSuffix": "_",
+  "brandMark": "✧",
+  "browserTitleSuffix": "personal digital garden",
   "statusLine": "this little corner is always under construction ✳",
   "nowWatching": "[ add something you're watching ]",
   "nowPlaying": "[ add something you're playing ]",
   "nowReading": "[ add something you're reading ]",
   "nowListening": "[ add something you're listening to ]",
   "footerLine": "made on earth, somewhere under the stars.",
-  "siteTagline": "a little corner of the internet ✳ est. 2026",
-  "windowTitle": "✳ toprak://www/personal_garden/",
-  "brandSuffix": "_",
-  "brandMark": "✧",
-  "browserTitleSuffix": "personal digital garden",
-  "faviconImage": "",
-  "brandImage": "",
-  "heroImage": "",
-  "sidebarSkyImage": "",
-  "aboutExtra": "the lists are subjective. the order might change tomorrow. that's kind of the point.",
-  "aboutSignoff": "see you around,",
-  "aboutMeta": "about_me.txt / last updated whenever",
   "footerCopyrightNote": "best viewed with curiosity",
   "footerMark": "✧",
   "sidebarSkyTitle": "✳ night_sky.gif",
@@ -40,12 +36,10 @@
   "socialLinks": [
     {
       "label": "instagram",
-      "url": "",
       "enabled": true
     },
     {
       "label": "linkedin",
-      "url": "",
       "enabled": true
     }
   ],
@@ -59,43 +53,36 @@
     {
       "label": "garden",
       "href": "/posts/",
-      "icon": "",
       "enabled": true
     },
     {
       "label": "films",
       "href": "/films/",
-      "icon": "",
       "enabled": true
     },
     {
       "label": "games",
       "href": "/games/",
-      "icon": "",
       "enabled": true
     },
     {
       "label": "series",
       "href": "/series/",
-      "icon": "",
       "enabled": true
     },
     {
       "label": "books",
       "href": "/books/",
-      "icon": "",
       "enabled": true
     },
     {
       "label": "music",
       "href": "/music/",
-      "icon": "",
       "enabled": true
     },
     {
       "label": "about",
       "href": "/about/",
-      "icon": "",
       "enabled": true
     }
   ],
