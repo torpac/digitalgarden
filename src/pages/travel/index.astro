@@ -30,7 +30,7 @@ const travelStyle = [
   <div class="shell content-page">
     <SectionIntro {...copy.pages.travel}/>
     <div class="travel-panel rise-on-scroll" style={travelStyle}>
-      <div class="travel-panel-head"><span>✈ {travel.mapHeading}</span><span>EARTH / 001</span></div>
+      <div class="travel-panel-head"><span>{travel.mapHeading}</span></div>
       <div class="travel-panel-body">
         <p>{travel.mapDescription}</p>
         <div class="travel-toolbar">
@@ -70,7 +70,7 @@ const travelStyle = [
       <div id="travel-empty" hidden={selected.length>0}>{travel.emptyText}</div>
       <ul id="travel-list">{selected.map(country=><li>{country}</li>)}</ul>
     </div>
-    <div class="travel-note">{travel.note}</div>
+    {travel.note && <div class="travel-note">{travel.note}</div>}
   </div>
   <script>
     import { select } from 'd3-selection';

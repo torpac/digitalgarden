@@ -3,10 +3,10 @@
   "headline": "welcome to my digital garden!",
   "intro": "why? uhh because i wanted a distraction free platform i could share my thoughts on",
   "about": "hey hi hello",
-  "aboutExtra": "the lists are subjective. the order might change tomorrow. that's kind of the point.",
-  "aboutSignoff": "see you around,",
-  "aboutMeta": "about_me.txt / last updated whenever",
-  "siteTagline": "a little corner of the internet ✳ est. 2026",
+  "aboutExtra": "",
+  "aboutSignoff": "",
+  "aboutMeta": "",
+  "siteTagline": "",
   "windowTitle": "✳ toprak://www/whatareyoulookingat",
   "brandSuffix": "_",
   "brandMark": "✧",
@@ -17,14 +17,14 @@
   "nowReading": "volvo lastvagnar",
   "nowListening": "my massive playlist 🔥",
   "footerLine": "yo whats up",
-  "footerCopyrightNote": "best viewed with curiosity",
-  "footerMark": "✧",
-  "sidebarSkyCaption": "a little lost in space ☾",
+  "footerCopyrightNote": "",
+  "footerMark": "",
+  "sidebarSkyCaption": "",
   "sidebarSkyAlt": "A quiet snowy night with a glowing moon",
   "sidebarExplorerTitle": "⌁ explorer.exe",
   "sidebarCurrentTitle": "◎ currently.txt",
   "sidebarSocialTitle": "↗ elsewhere",
-  "sidebarStamp": "✳ under construction, always.",
+  "sidebarStamp": "",
   "sidebarSocialMissing": "[add link]",
   "faviconImage": "/uploads/mvimg20260802225439.jpg",
   "currentlyLabels": {
@@ -105,56 +105,56 @@
       "name": "garden",
       "href": "/posts/",
       "symbol": "✳",
-      "description": "posts & thoughts",
+      "description": "",
       "enabled": true
     },
     {
       "name": "films",
       "href": "/films/",
       "symbol": "◈",
-      "description": "movie diary",
+      "description": "",
       "enabled": true
     },
     {
       "name": "games",
       "href": "/games/",
       "symbol": "❋",
-      "description": "little worlds",
+      "description": "",
       "enabled": true
     },
     {
       "name": "series",
       "href": "/series/",
       "symbol": "☾",
-      "description": "episodes",
+      "description": "",
       "enabled": true
     },
     {
       "name": "books",
       "href": "/books/",
       "symbol": "✎",
-      "description": "bookshelf",
+      "description": "",
       "enabled": true
     },
     {
       "name": "music",
       "href": "/music/",
       "symbol": "♫",
-      "description": "playlists",
+      "description": "",
       "enabled": true
     },
     {
       "name": "gallery",
       "href": "/gallery/",
       "symbol": "▧",
-      "description": "things worth keeping",
+      "description": "",
       "enabled": true
     },
     {
       "name": "travel",
       "href": "/travel/",
       "symbol": "✈",
-      "description": "places i've wandered",
+      "description": "",
       "enabled": true
     }
   ],

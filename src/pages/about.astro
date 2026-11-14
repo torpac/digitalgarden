@@ -8,10 +8,10 @@ import { safeExternalUrl } from '../lib/paths';
   <div class="shell narrow content-page">
     <SectionIntro {...copy.pages.about} />
     <div class="about-letter rise-on-scroll">
-      <span class="letter-date">{site.aboutMeta}</span>
+      {site.aboutMeta && <span class="letter-date">{site.aboutMeta}</span>}
       <p>{site.about}</p>
       {site.aboutExtra && <p>{site.aboutExtra}</p>}
-      <div class="letter-signoff">{site.aboutSignoff}<br /><strong>{site.name.toLowerCase()} ✳</strong></div>
+      {site.aboutSignoff && <div class="letter-signoff">{site.aboutSignoff} <strong>{site.name.toLowerCase()}</strong></div>}
     </div>
     <div class="about-socials rise-on-scroll">
       <span class="eyebrow">{site.sidebarSocialTitle}</span>

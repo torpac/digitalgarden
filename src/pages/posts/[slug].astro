@@ -22,6 +22,6 @@ const img = mediaUrl(entry.data.cover);
     </header>
     {img && <img class="post-hero-cover" src={img} alt={`${entry.data.title} cover`} />}
     <div class="prose"><Content /></div>
-    <footer class="detail-end">{copy.posts.postEnd} <a href={path('/posts/')}>{copy.posts.postEndLink}</a></footer>
+    <footer class="detail-end">{copy.posts.postEnd && <span>{copy.posts.postEnd} </span>}<a href={path('/posts/')}>{copy.posts.postEndLink}</a></footer>
   </article>
 </BaseLayout>

@@ -10,7 +10,7 @@ const pictures = (await getCollection('gallery', ({data}) => !data.draft && !!da
 <BaseLayout title={copy.pages.gallery.title}>
   <div class="shell content-page">
     <SectionIntro {...copy.pages.gallery} />
-    <div class="gallery-toolbar"><span>▧ gallery / {pictures.length} saved pictures</span><span>little things worth keeping ✧</span></div>
+    <div class="gallery-toolbar"><span>{pictures.length} pictures</span></div>
     {pictures.length > 0 ? <div class="gallery-columns">
       {pictures.map((picture, index) => {
         const image = mediaUrl(picture.data.image);
@@ -29,7 +29,7 @@ const pictures = (await getCollection('gallery', ({data}) => !data.draft && !!da
           </div>
         </article>;
       })}
-    </div> : <div class="gallery-empty"><span class="pixel">✧</span>nothing in the gallery yet.<p>upload your first image in Pages CMS → Gallery.</p></div>}
+    </div> : <div class="gallery-empty">to be changed</div>}
     <dialog id="gallery-lightbox" class="gallery-lightbox" aria-label="Picture viewer">
       <div class="gallery-lightbox-head"><strong id="gallery-lightbox-title"></strong><button class="gallery-lightbox-close" type="button" id="gallery-lightbox-close">× close</button></div>
       <img id="gallery-lightbox-image" alt="" />

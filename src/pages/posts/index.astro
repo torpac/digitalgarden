@@ -11,9 +11,11 @@ const stages = { seedling: copy.posts.seedlingLabel, growing: copy.posts.growing
 <BaseLayout title={copy.pages.posts.title}>
   <div class="shell content-page">
     <SectionIntro {...copy.pages.posts} />
-    <div class="garden-key rise-on-scroll">
-      <span>{copy.posts.seedlingLegend}</span><span>{copy.posts.growingLegend}</span><span>{copy.posts.evergreenLegend}</span>
-    </div>
+    {(copy.posts.seedlingLegend || copy.posts.growingLegend || copy.posts.evergreenLegend) && <div class="garden-key rise-on-scroll">
+      {copy.posts.seedlingLegend && <span>{copy.posts.seedlingLegend}</span>}
+      {copy.posts.growingLegend && <span>{copy.posts.growingLegend}</span>}
+      {copy.posts.evergreenLegend && <span>{copy.posts.evergreenLegend}</span>}
+    </div>}
     <div class="post-index">
       {entries.map((entry) => {
         const img = mediaUrl(entry.data.cover);

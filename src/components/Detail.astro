@@ -28,5 +28,5 @@ const image = mediaUrl(cover);
     </div>
   </header>
   <div class="prose"><slot /></div>
-  <footer class="detail-end">{copy.media.detailEnd}</footer>
+  {copy.media.detailEnd && <footer class="detail-end">{copy.media.detailEnd}</footer>}
 </article>

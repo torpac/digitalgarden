@@ -5,8 +5,8 @@
   "seaColor": "#162238",
   "outlineColor": "#62738f",
   "mapHeading": "world_map.svg",
-  "mapDescription": "countries i've visited are highlighted. scroll to zoom, drag to move, or use the buttons. select countries in edit mode and copy the list into Pages CMS to publish changes.",
+  "mapDescription": "scroll to zoom · drag to move · use edit map to select countries",
   "selectedHeading": "visited countries",
-  "emptyText": "nothing marked yet. the world is waiting.",
-  "note": "my map, my memories. somewhere on this planet."
+  "emptyText": "to be changed",
+  "note": ""
 }

@@ -45,16 +45,16 @@ const sections = site.homeSections.filter((s) => s.enabled);
           {appearance.visibility.folderPanel && <section class="web-panel rise-on-scroll">
             <div class="panel-title"><span>{text.foldersTitle}</span><small>{text.foldersMeta}</small></div>
             <div class="panel-body">
-              <h2 class="small-title">{text.foldersHeading}</h2>
+              {text.foldersHeading && <h2 class="small-title">{text.foldersHeading}</h2>}
               <div class="folder-grid">
-                {publicFolders.map((f,i) => <a class="folder-tile" href={path(f.href)}><span class="folder-ico">{f.symbol}</span><strong>{String(i+1).padStart(2,'0')}_{f.name}/</strong><small>{f.description}</small></a>)}
+                {publicFolders.map((f,i) => <a class="folder-tile" href={path(f.href)}><span class="folder-ico">{f.symbol}</span><strong>{String(i+1).padStart(2,'0')}_{f.name}/</strong>{f.description && <small>{f.description}</small>}</a>)}
               </div>
             </div>
           </section>}
           {appearance.visibility.recentPanel && <section class="web-panel rise-on-scroll">
             <div class="panel-title"><span>{text.recentTitle}</span><small>{text.recentMeta}</small></div>
             <div class="panel-body">
-              <h2 class="small-title">{text.recentHeading}</h2>
+              {text.recentHeading && <h2 class="small-title">{text.recentHeading}</h2>}
               <div class="recent-posts">
                 {posts.slice(0,3).map((post) => <a href={path(`/posts/${post.id}/`)}>
                   <span>{post.data.date.toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'})}</span>
@@ -69,7 +69,7 @@ const sections = site.homeSections.filter((s) => s.enabled);
         {section === 'favorites' && appearance.visibility.favoritesPanel && <section class="web-panel rise-on-scroll">
           <div class="panel-title"><span>{text.favoritesTitle}</span><small>{text.favoritesMeta}</small></div>
           <div class="panel-body">
-            <h2 class="small-title">{text.favoritesHeading}</h2>
+            {text.favoritesHeading && <h2 class="small-title">{text.favoritesHeading}</h2>}
             <div class="toplists-grid">
               {publicShelves.map((shelf) => <div class="toplist">
                 <div class="toplist-heading"><span>{shelf.symbol} {shelf.name}</span><a href={path(shelf.href)}>{text.favoritesLink}</a></div>

@@ -34,13 +34,13 @@
     "explorerWidget": true,
     "currentlyWidget": true,
     "socialWidget": true,
-    "sidebarStamp": true,
+    "sidebarStamp": false,
     "hero": true,
     "folderPanel": true,
     "recentPanel": true,
     "favoritesPanel": true,
     "pinboardPanel": true,
-    "homeGoodbye": true,
+    "homeGoodbye": false,
     "footer": true
   },
   "layout": {
