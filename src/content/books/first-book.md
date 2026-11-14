@@ -1,5 +1,5 @@
 ---
-title: Your first book
+title: Test book blabla
 author: Your favorite author
 cover: /uploads/pearl-tom.gif
 rank: 1
